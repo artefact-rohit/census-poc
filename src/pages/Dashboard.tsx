@@ -28,7 +28,7 @@ const Dashboard = () => {
   // Mock data for demonstration
   const getData = useAtomValue(jsonDataAtom);
 
-  const mockData = getData.overview.listCardData;
+  const mockData = getData.overview.cardData;
 
   const [resolvedItems, setResolvedItems] = useState<number[]>([]);
 
@@ -138,10 +138,26 @@ const Dashboard = () => {
             weeklyProgress={mockData.registers.weeklyProgress}
             plannedVsActual={mockData.registers.plannedVsActual}
             breakdown={[
-              { label: "Population & Household", value: 1, total: 1 },
-              { label: "Buildings & Units", value: 1, total: 1 },
-              { label: "Establishments", value: 1, total: 1 },
-              { label: "SBR (Secondary)", value: 7, total: 10 },
+              {
+                label: "Population & Household",
+                value: mockData.registers.baskets.population.completed,
+                total: mockData.registers.baskets.population.total,
+              },
+              {
+                label: "Buildings & Units",
+                value: mockData.registers.baskets.buildings.completed,
+                total: mockData.registers.baskets.buildings.total,
+              },
+              {
+                label: "Establishments",
+                value: mockData.registers.baskets.establishments.completed,
+                total: mockData.registers.baskets.establishments.total,
+              },
+              {
+                label: "SBR (Secondary)",
+                value: mockData.registers.baskets.sbr.completed,
+                total: mockData.registers.baskets.sbr.total,
+              },
             ]}
           />
 
@@ -152,10 +168,26 @@ const Dashboard = () => {
             weeklyProgress={mockData.datasets.weeklyProgress}
             plannedVsActual={mockData.datasets.plannedVsActual}
             breakdown={[
-              { label: "MOI Data", value: 12, total: 15 },
-              { label: "MOCI Records", value: 8, total: 10 },
-              { label: "Kahramaa", value: 5, total: 5 },
-              { label: "Education Ministry", value: 20, total: 22 },
+              {
+                label: "MOI Data",
+                value: mockData.datasets.baskets.moi.completed,
+                total: mockData.datasets.baskets.moi.total,
+              },
+              {
+                label: "MOCI Records",
+                value: mockData.datasets.baskets.moci.completed,
+                total: mockData.datasets.baskets.moci.total,
+              },
+              {
+                label: "Kahramaa",
+                value: mockData.datasets.baskets.kahramaa.completed,
+                total: mockData.datasets.baskets.kahramaa.total,
+              },
+              {
+                label: "Education Ministry",
+                value: mockData.datasets.baskets.education.completed,
+                total: mockData.datasets.baskets.education.total,
+              },
             ]}
           />
 
@@ -188,15 +220,25 @@ const Dashboard = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm">UI/UX Design</span>
-                  <StatusBadge status="completed" />
+                  <StatusBadge
+                    status={
+                      mockData.dissemination.baskets["ui/ux"] || "completed"
+                    }
+                  />
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Platform Development</span>
-                  <StatusBadge status="in-progress" />
+                  <StatusBadge
+                    status={
+                      mockData.dissemination.baskets.platform || "in-progress"
+                    }
+                  />
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">KPI Integration</span>
-                  <StatusBadge status="not-started" />
+                  <StatusBadge
+                    status={mockData.dissemination.baskets.kpi || "not-started"}
+                  />
                 </div>
               </div>
 

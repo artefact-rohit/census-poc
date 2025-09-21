@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { atom } from "jotai";
 import { twMerge } from "tailwind-merge";
+import { atomWithStorage } from "jotai/utils";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -9,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 // Sample large JSON object
 const initialJsonData = {
   overview: {
-    listCardData: {
+    cardData: {
       indicators: {
         completed: 98,
         total: 131,
@@ -26,14 +27,24 @@ const initialJsonData = {
       registers: {
         completed: 10,
         total: 13,
-        core: { completed: 3, total: 3 },
-        secondary: { completed: 7, total: 10 },
+        baskets: {
+          population: { completed: 1, total: 1 },
+          sbr: { completed: 7, total: 10 },
+          buildings: { completed: 1, total: 1 },
+          establishments: { completed: 1, total: 1 },
+        },
         weeklyProgress: 8.5,
         plannedVsActual: 89.7,
       },
       datasets: {
         acquired: 45,
         total: 52,
+        baskets: {
+          moi: { completed: 1, total: 15 },
+          moci: { completed: 7, total: 10 },
+          kahramaa: { completed: 1, total: 5 },
+          education: { completed: 1, total: 22 },
+        },
         weeklyProgress: 6,
         plannedVsActual: 92.1,
       },
@@ -41,6 +52,11 @@ const initialJsonData = {
         progress: 78,
         weeklyProgress: 15,
         plannedVsActual: 85.6,
+        baskets: {
+          "ui/ux": "completed",
+          platform: "in-progress",
+          kpi: "not-started",
+        },
       },
     },
     actionItems: [
@@ -283,7 +299,7 @@ const initialJsonData = {
 };
 
 // Jotai atoms
-const jsonDataAtom = atom(initialJsonData);
+const jsonDataAtom = atomWithStorage("initialJsonData", initialJsonData);
 const isEditingAtom = atom(false);
 const jsonStringAtom = atom(JSON.stringify(initialJsonData, null, 2));
 const validationErrorAtom = atom(null);
