@@ -9,6 +9,7 @@ import {
   Share2,
   Building2,
   AmpersandIcon,
+  Shield,
 } from "lucide-react";
 
 interface LayoutProps {
@@ -21,7 +22,7 @@ const navigation = [
   { name: "Registers", href: "/registers", icon: Database },
   { name: "Datasets", href: "/datasets", icon: Layers },
   { name: "Dissemination", href: "/dissemination", icon: Share2 },
-  { name: "Admin", href: "/admin", icon: AmpersandIcon },
+  { name: "Admin", href: "/admin", icon: Shield },
 ];
 
 export const Layout = ({ children }: LayoutProps) => {
