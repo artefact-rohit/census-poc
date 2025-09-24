@@ -285,29 +285,48 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
               {/* Sample Tabulation Table */}
               <div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-border">
-                        <th className="text-left py-2">Sector</th>
-                        <th className="text-right py-2">Total Establishment</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="border-b border-border/50">
-                        <td className="py-2">Commercial</td>
-                        <td className="text-right py-2">71921</td>
-                      </tr>
-                      <tr className="border-b border-border/50">
-                        <td className="py-2">Government</td>
-                        <td className="text-right py-2">111</td>
-                      </tr>
+                  {isQatariIndicator ? (
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border">
+                          <th className="text-left py-2">
+                            Qatari Employee Count in Private Sector
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2">13883</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  ) : (
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border">
+                          <th className="text-left py-2">Sector</th>
+                          <th className="text-right py-2">
+                            Total Establishment
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2">Commercial</td>
+                          <td className="text-right py-2">71921</td>
+                        </tr>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2">Government</td>
+                          <td className="text-right py-2">111</td>
+                        </tr>
 
-                      <tr>
-                        <td className="py-2 font-medium">Total</td>
-                        <td className="text-right py-2 font-medium">72032</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                        <tr>
+                          <td className="py-2 font-medium">Total</td>
+                          <td className="text-right py-2 font-medium">72032</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               </div>
             </div>
