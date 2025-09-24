@@ -23,6 +23,13 @@ import { SummaryCard } from "@/components/SummaryCard";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useAtomValue } from "jotai";
 import { jsonDataAtom } from "@/lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Dashboard = () => {
   // Mock data for demonstration
@@ -31,6 +38,8 @@ const Dashboard = () => {
   const mockData = getData.overview.cardData;
 
   const [resolvedItems, setResolvedItems] = useState<number[]>([]);
+  const [indicatorStatusFilter, setIndicatorStatusFilter] =
+    useState("validated");
 
   const actionItems = getData.overview.actionItems;
 
@@ -96,47 +105,225 @@ const Dashboard = () => {
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <SummaryCard
-            title="Indicators"
-            completed={mockData.indicators.completed}
-            total={mockData.indicators.total}
-            weeklyProgress={mockData.indicators.weeklyProgress}
-            plannedVsActual={mockData.indicators.plannedVsActual}
-            breakdown={[
-              {
-                label: "Population",
-                value: mockData.indicators.baskets.population.completed,
-                total: mockData.indicators.baskets.population.total,
-              },
-              {
-                label: "Family Characteristics",
-                value: mockData.indicators.baskets.family.completed,
-                total: mockData.indicators.baskets.family.total,
-              },
-              {
-                label: "Economic",
-                value: mockData.indicators.baskets.economic.completed,
-                total: mockData.indicators.baskets.economic.total,
-              },
-              {
-                label: "Buildings & Units",
-                value: mockData.indicators.baskets.buildings.completed,
-                total: mockData.indicators.baskets.buildings.total,
-              },
-              {
-                label: "Establishments",
-                value: mockData.indicators.baskets.establishments.completed,
-                total: mockData.indicators.baskets.establishments.total,
-              },
-            ]}
-          />
+          {/* Indicators Card with Status Filter */}
+          <Card className="shadow-sm">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg font-semibold">
+                  Indicators
+                </CardTitle>
+                <div className="flex items-center space-x-2">
+                  {getTrendIcon(mockData.indicators.weeklyProgress)}
+                  <span className="text-sm font-medium">
+                    {mockData.indicators.weeklyProgress > 0 ? "+" : ""}
+                    {mockData.indicators.weeklyProgress}% WoW
+                  </span>
+                </div>
+              </div>
+              <div className="mt-2">
+                <Select
+                  value={indicatorStatusFilter}
+                  onValueChange={setIndicatorStatusFilter}
+                >
+                  <SelectTrigger className="w-48">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border border-border z-50">
+                    <SelectItem value="not-started">Not Started</SelectItem>
+                    <SelectItem value="in-progress">In Progress</SelectItem>
+                    <SelectItem value="computed">Computed</SelectItem>
+                    <SelectItem value="validated">Validated</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Main Progress */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-end">
+                  <span className="text-2xl font-bold text-card-foreground">
+                    {mockData.indicators.completed}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      /{mockData.indicators.total}
+                    </span>
+                  </span>
+                  <span className="text-sm font-medium text-status-success">
+                    {(
+                      (mockData.indicators.completed /
+                        mockData.indicators.total) *
+                      100
+                    ).toFixed(1)}
+                    %
+                  </span>
+                </div>
+                <Progress
+                  value={
+                    (mockData.indicators.completed /
+                      mockData.indicators.total) *
+                    100
+                  }
+                />
+              </div>
+
+              {/* Breakdown by Basket */}
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-card-foreground">
+                  Breakdown by Basket (out of 131)
+                </h4>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      Population
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium">
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.population?.completed
+                        }
+                        /131
+                      </span>
+                      <div className="w-16">
+                        <Progress
+                          value={
+                            (mockData.indicators.baskets?.[
+                              indicatorStatusFilter
+                            ]?.population?.completed /
+                              131) *
+                            100
+                          }
+                          className="h-1.5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      Family Characteristics
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium">
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.family?.completed
+                        }
+                        /131
+                      </span>
+                      <div className="w-16">
+                        <Progress
+                          value={
+                            (mockData.indicators.baskets?.[
+                              indicatorStatusFilter
+                            ]?.family?.completed /
+                              131) *
+                            100
+                          }
+                          className="h-1.5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      Economic
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium">
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.economic?.completed
+                        }
+                        /131
+                      </span>
+                      <div className="w-16">
+                        <Progress
+                          value={
+                            (mockData.indicators.baskets?.[
+                              indicatorStatusFilter
+                            ]?.economic?.completed /
+                              131) *
+                            100
+                          }
+                          className="h-1.5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      Buildings
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium">
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.buildings?.completed
+                        }
+                        /131
+                      </span>
+                      <div className="w-16">
+                        <Progress
+                          value={
+                            (mockData.indicators.baskets?.[
+                              indicatorStatusFilter
+                            ]?.buildings?.completed /
+                              131) *
+                            100
+                          }
+                          className="h-1.5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">
+                      Establishments
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium">
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.establishments?.completed
+                        }
+                        /131
+                      </span>
+                      <div className="w-16">
+                        <Progress
+                          value={
+                            (mockData.indicators.baskets?.[
+                              indicatorStatusFilter
+                            ]?.establishments?.completed /
+                              131) *
+                            100
+                          }
+                          className="h-1.5"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Planned vs Actual */}
+              <div className="pt-2 border-t border-border">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    Planned: {mockData.indicators.planned}% | Actual:{" "}
+                    {mockData.indicators.actual}%
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           <SummaryCard
             title="Registers"
             completed={mockData.registers.completed}
             total={mockData.registers.total}
             weeklyProgress={mockData.registers.weeklyProgress}
-            plannedVsActual={mockData.registers.plannedVsActual}
+            plannedVsActual={mockData.registers.actual}
+            planned={mockData.registers.planned}
+            showFraction={false}
             breakdown={[
               {
                 label: "Population & Household",
@@ -166,7 +353,8 @@ const Dashboard = () => {
             completed={mockData.datasets.acquired}
             total={mockData.datasets.total}
             weeklyProgress={mockData.datasets.weeklyProgress}
-            plannedVsActual={mockData.datasets.plannedVsActual}
+            plannedVsActual={mockData.datasets.actual}
+            planned={mockData.datasets.planned}
             breakdown={[
               {
                 label: "MOI Data",
@@ -220,35 +408,23 @@ const Dashboard = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm">UI/UX Design</span>
-                  <StatusBadge
-                    status={
-                      mockData.dissemination.baskets["ui/ux"] || "completed"
-                    }
-                  />
+                  <StatusBadge status="in-progress" />
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Platform Development</span>
-                  <StatusBadge
-                    status={
-                      mockData.dissemination.baskets.platform || "in-progress"
-                    }
-                  />
+                  <StatusBadge status="in-progress" />
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">KPI Integration</span>
-                  <StatusBadge
-                    status={mockData.dissemination.baskets.kpi || "not-started"}
-                  />
+                  <StatusBadge status="not-started" />
                 </div>
               </div>
 
               <div className="pt-2 border-t border-border">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">
-                    Planned vs Actual
-                  </span>
-                  <span className="font-medium">
-                    {mockData.dissemination.plannedVsActual}%
+                    Planned: {mockData.dissemination.planned}% | Actual:{" "}
+                    {mockData.dissemination.actual}%
                   </span>
                 </div>
               </div>
