@@ -58,6 +58,18 @@ const Dashboard = () => {
     }
   };
 
+  const getIndicatorTotal = () => {
+    return indicatorStatusFilter == "in-progress"
+      ? mockData.indicators.inProgress
+      : indicatorStatusFilter == "not-started"
+      ? mockData.indicators.notStarted
+      : indicatorStatusFilter == "computed"
+      ? mockData.indicators?.computed
+      : indicatorStatusFilter == "validated"
+      ? mockData.indicators?.validated
+      : 0;
+  };
+
   const getTrendIcon = (value: number) => {
     if (value > 0)
       return <TrendingUp className="h-4 w-4 text-status-success" />;
@@ -142,15 +154,14 @@ const Dashboard = () => {
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
                   <span className="text-2xl font-bold text-card-foreground">
-                    {mockData.indicators.completed}
+                    {getIndicatorTotal()}
                     <span className="text-lg font-normal text-muted-foreground">
                       /{mockData.indicators.total}
                     </span>
                   </span>
                   <span className="text-sm font-medium text-status-success">
                     {(
-                      (mockData.indicators.completed /
-                        mockData.indicators.total) *
+                      (getIndicatorTotal() / mockData.indicators.total) *
                       100
                     ).toFixed(1)}
                     %
@@ -158,9 +169,7 @@ const Dashboard = () => {
                 </div>
                 <Progress
                   value={
-                    (mockData.indicators.completed /
-                      mockData.indicators.total) *
-                    100
+                    (getIndicatorTotal() / mockData.indicators.total) * 100
                   }
                 />
               </div>
@@ -168,7 +177,7 @@ const Dashboard = () => {
               {/* Breakdown by Basket */}
               <div className="space-y-2">
                 <h4 className="text-sm font-medium text-card-foreground">
-                  Breakdown by Basket (out of 131)
+                  Breakdown by Basket (out of {mockData.indicators.total})
                 </h4>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -181,7 +190,11 @@ const Dashboard = () => {
                           mockData.indicators.baskets?.[indicatorStatusFilter]
                             ?.population?.completed
                         }
-                        /131
+                        /
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.population?.total
+                        }
                       </span>
                       <div className="w-16">
                         <Progress
@@ -189,7 +202,9 @@ const Dashboard = () => {
                             (mockData.indicators.baskets?.[
                               indicatorStatusFilter
                             ]?.population?.completed /
-                              131) *
+                              mockData.indicators.baskets?.[
+                                indicatorStatusFilter
+                              ]?.population?.total) *
                             100
                           }
                           className="h-1.5"
@@ -207,7 +222,11 @@ const Dashboard = () => {
                           mockData.indicators.baskets?.[indicatorStatusFilter]
                             ?.family?.completed
                         }
-                        /131
+                        /
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.family?.total
+                        }
                       </span>
                       <div className="w-16">
                         <Progress
@@ -215,7 +234,9 @@ const Dashboard = () => {
                             (mockData.indicators.baskets?.[
                               indicatorStatusFilter
                             ]?.family?.completed /
-                              131) *
+                              mockData.indicators.baskets?.[
+                                indicatorStatusFilter
+                              ]?.family?.total) *
                             100
                           }
                           className="h-1.5"
@@ -233,7 +254,11 @@ const Dashboard = () => {
                           mockData.indicators.baskets?.[indicatorStatusFilter]
                             ?.economic?.completed
                         }
-                        /131
+                        /
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.economic?.total
+                        }
                       </span>
                       <div className="w-16">
                         <Progress
@@ -241,7 +266,9 @@ const Dashboard = () => {
                             (mockData.indicators.baskets?.[
                               indicatorStatusFilter
                             ]?.economic?.completed /
-                              131) *
+                              mockData.indicators.baskets?.[
+                                indicatorStatusFilter
+                              ]?.economic?.total) *
                             100
                           }
                           className="h-1.5"
@@ -259,7 +286,11 @@ const Dashboard = () => {
                           mockData.indicators.baskets?.[indicatorStatusFilter]
                             ?.buildings?.completed
                         }
-                        /131
+                        /
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.buildings?.total
+                        }
                       </span>
                       <div className="w-16">
                         <Progress
@@ -267,7 +298,9 @@ const Dashboard = () => {
                             (mockData.indicators.baskets?.[
                               indicatorStatusFilter
                             ]?.buildings?.completed /
-                              131) *
+                              mockData.indicators.baskets?.[
+                                indicatorStatusFilter
+                              ]?.buildings?.total) *
                             100
                           }
                           className="h-1.5"
@@ -285,7 +318,11 @@ const Dashboard = () => {
                           mockData.indicators.baskets?.[indicatorStatusFilter]
                             ?.establishments?.completed
                         }
-                        /131
+                        /
+                        {
+                          mockData.indicators.baskets?.[indicatorStatusFilter]
+                            ?.establishments?.total
+                        }
                       </span>
                       <div className="w-16">
                         <Progress
@@ -293,7 +330,9 @@ const Dashboard = () => {
                             (mockData.indicators.baskets?.[
                               indicatorStatusFilter
                             ]?.establishments?.completed /
-                              131) *
+                              mockData.indicators.baskets?.[
+                                indicatorStatusFilter
+                              ]?.establishments?.total) *
                             100
                           }
                           className="h-1.5"
@@ -329,21 +368,25 @@ const Dashboard = () => {
                 label: "Population & Household",
                 value: mockData.registers.baskets.population.completed,
                 total: mockData.registers.baskets.population.total,
+                isPercentage: true,
               },
               {
                 label: "Buildings & Units",
                 value: mockData.registers.baskets.buildings.completed,
                 total: mockData.registers.baskets.buildings.total,
+                isPercentage: true,
               },
               {
                 label: "Establishments",
                 value: mockData.registers.baskets.establishments.completed,
                 total: mockData.registers.baskets.establishments.total,
+                isPercentage: true,
               },
               {
                 label: "SBR (Secondary)",
                 value: mockData.registers.baskets.sbr.completed,
                 total: mockData.registers.baskets.sbr.total,
+                isPercentage: true,
               },
             ]}
           />
@@ -357,24 +400,29 @@ const Dashboard = () => {
             planned={mockData.datasets.planned}
             breakdown={[
               {
-                label: "MOI Data",
-                value: mockData.datasets.baskets.moi.completed,
-                total: mockData.datasets.baskets.moi.total,
+                label: "Access Secured",
+                value: mockData.datasets.byStatus.accessSecured,
+                total: mockData.datasets.total,
               },
               {
-                label: "MOCI Records",
-                value: mockData.datasets.baskets.moci.completed,
-                total: mockData.datasets.baskets.moci.total,
+                label: "Integrated",
+                value: mockData.datasets.byStatus.integrated,
+                total: mockData.datasets.total,
               },
               {
-                label: "Kahramaa",
-                value: mockData.datasets.baskets.kahramaa.completed,
-                total: mockData.datasets.baskets.kahramaa.total,
+                label: "Quality Assured",
+                value: mockData.datasets.byStatus.qualityAssured,
+                total: mockData.datasets.total,
               },
               {
-                label: "Education Ministry",
-                value: mockData.datasets.baskets.education.completed,
-                total: mockData.datasets.baskets.education.total,
+                label: "Validated",
+                value: mockData.datasets.byStatus.validated,
+                total: mockData.datasets.total,
+              },
+              {
+                label: "Not Started",
+                value: mockData.datasets.byStatus.notStarted,
+                total: mockData.datasets.total,
               },
             ]}
           />
@@ -408,15 +456,19 @@ const Dashboard = () => {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm">UI/UX Design</span>
-                  <StatusBadge status="in-progress" />
+                  <StatusBadge
+                    status={mockData.dissemination.baskets["ui/ux"]}
+                  />
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">Platform Development</span>
-                  <StatusBadge status="in-progress" />
+                  <StatusBadge
+                    status={mockData.dissemination.baskets.platform}
+                  />
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm">KPI Integration</span>
-                  <StatusBadge status="not-started" />
+                  <StatusBadge status={mockData.dissemination.baskets.kpi} />
                 </div>
               </div>
 
