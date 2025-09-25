@@ -72,15 +72,44 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 </table>
 <p>&nbsp;</p>`;
 
-  const nextSteps1 = [
-    "We are observing incosistencies between MOI and MOCI data and our current hypothesis MoCI is not updated with deregistered, we are validating with our experrts and weill update numbers",
-    "Get data from QFZ, QSTP",
-    "Due to the masking of establishment names in the CGB, the exact number of unique establishments cannot be accurately determined",
-    "MOCI can leverage AI to identify whether a Establishment is public or private(Google place, NLP to check establishment website using establishment name)",
+  const mainData1 = [
+    {
+      nextStep:
+        "We are observing incosistencies between MOI and MOCI data and our current hypothesis MoCI is not updated with deregistered, we are validating with our experrts and weill update numbers",
+      dependency: "sdafsaf",
+      targetDate: "2024-10-10",
+    },
+    {
+      nextStep: "Get data from QFZ, QSTP",
+      dependency: "sdafsaf",
+      targetDate: "2024-10-10",
+    },
+    {
+      nextStep:
+        "Due to the masking of establishment names in the CGB, the exact number of unique establishments cannot be accurately determined",
+      dependency: "sdafsaf",
+      targetDate: "2024-10-10",
+    },
+    {
+      nextStep:
+        "MOCI can leverage AI to identify whether a Establishment is public or private(Google place, NLP to check establishment website using establishment name)",
+      dependency: "sdafsaf",
+      targetDate: "2024-10-10",
+    },
   ];
-  const nextSteps2 = [
-    "Request data for QFZ",
-    "Unmask establishment name in QFC to integrate with GRSIA for coverage",
+
+  const mainData2 = [
+    {
+      nextStep: "Request data for QFZ",
+      dependency: "sdafsaf",
+      targetDate: "2024-10-10",
+    },
+    {
+      nextStep:
+        "Unmask establishment name in QFC to integrate with GRSIA for coverage",
+      dependency: "sdafsaf",
+      targetDate: "2024-10-10",
+    },
   ];
 
   if (!indicator) {
@@ -110,49 +139,6 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   };
 
   // Mock additional data for demonstration
-  const mockDetailData = {
-    weeklyChange: {
-      coverage: +2.4,
-      qdti: +1.8,
-    },
-    plannedVsActual: {
-      coverage: 94.2,
-      qdti: 87.5,
-    },
-    dataSources: [
-      "Population Register",
-      "MOI Civil Records",
-      "Educational Records",
-    ],
-    computationFrequency: "Weekly",
-    nextUpdate: "2024-09-25",
-    dependencies: ["Population Register completion", "Data quality validation"],
-    issues: [
-      {
-        type: "warning",
-        message:
-          "We are observing incosistencies between MOI and MOCI data and our current hypothesis MoCI is not updated with deregistered, we are validating with our experrts and weill update numbers",
-        eta: "2024-09-22",
-      },
-      {
-        type: "warning",
-        message: "Get data from QFZ, QSTP",
-        eta: "2024-09-22",
-      },
-      {
-        type: "warning",
-        message:
-          "Due to the masking of establishment names in the CGB, the exact number of unique establishments cannot be accurately determined",
-        eta: "2024-09-22",
-      },
-      {
-        type: "warning",
-        message:
-          "MOCI can leverage AI to identify whether a Establishment is public or private(Google place, NLP to check establishment website using establishment name)",
-        eta: "2024-09-22",
-      },
-    ],
-  };
 
   return (
     <div className="space-y-6">
@@ -279,7 +265,9 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       <span className="text-muted-foreground">
                         Dependencies:
                       </span>
-                      <span>{mockDetailData.dependencies.length}</span>
+                      <span>
+                        {(isQatariIndicator ? mainData2 : mainData1).length}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -371,22 +359,22 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {(isQatariIndicator ? nextSteps2 : nextSteps1).length > 0 ? (
+            {(isQatariIndicator ? mainData2 : mainData1).length > 0 ? (
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left py-2">Next steps</th>
-                    <th className="text-left py-2 w-[20%]">Dependencies</th>
-                    <th className="text-left py-2">Target Date</th>
+                    <th className="text-left py-2 w-[60%]">Next steps</th>
+                    <th className="text-left py-2 ">Dependencies</th>
+                    <th className="py-2 text-center">Target Date</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {(isQatariIndicator ? nextSteps2 : nextSteps1).map(
+                  {(isQatariIndicator ? mainData2 : mainData1).map(
                     (issue, index) => (
                       <tr key={index} className="border-b border-border/50">
-                        <td className="py-2 ">{issue}</td>
-                        <td className="py-2 text-center">13883</td>
-                        <td className="py-2 text-center">13883</td>
+                        <td className="py-2 ">{issue.nextStep}</td>
+                        <td className="py-2 text-center">{issue.dependency}</td>
+                        <td className="py-2 text-center">{issue.targetDate}</td>
                       </tr>
                     )
                   )}
