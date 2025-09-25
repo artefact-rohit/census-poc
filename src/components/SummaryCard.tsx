@@ -18,6 +18,7 @@ interface SummaryCardProps {
   planned?: number;
   breakdown?: BreakdownItem[];
   showFraction?: boolean;
+  hideProgressBar?: boolean;
 }
 
 export const SummaryCard = ({
@@ -29,6 +30,7 @@ export const SummaryCard = ({
   planned,
   breakdown,
   showFraction = true,
+  hideProgressBar = false,
 }: SummaryCardProps) => {
   const completionRate = (completed / total) * 100;
 
@@ -49,45 +51,47 @@ export const SummaryCard = ({
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             {getTrendIcon(weeklyProgress)}
             <span className="text-sm font-medium">
               {weeklyProgress > 0 ? "+" : ""}
               {weeklyProgress}% WoW
             </span>
-          </div>
+          </div> */}
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Main Progress */}
-        <div className="space-y-2">
-          <div className="flex justify-between items-end">
-            <span className="text-2xl font-bold text-card-foreground">
-              {showFraction ? (
-                <>
-                  {completed}
-                  <span className="text-lg font-normal text-muted-foreground">
-                    /{total}
+        {hideProgressBar ? null : (
+          <div className="space-y-2">
+            <div className="flex justify-between items-end">
+              <span className="text-2xl font-bold text-card-foreground">
+                {showFraction ? (
+                  <>
+                    {completed}
+                    <span className="text-lg font-normal text-muted-foreground">
+                      /{total}
+                    </span>
+                  </>
+                ) : (
+                  <span className={`${getStatusColor(completionRate)}`}>
+                    {completionRate.toFixed(1)}%
                   </span>
-                </>
-              ) : (
-                <span className={`${getStatusColor(completionRate)}`}>
+                )}
+              </span>
+              {showFraction && (
+                <span
+                  className={`text-sm font-medium ${getStatusColor(
+                    completionRate
+                  )}`}
+                >
                   {completionRate.toFixed(1)}%
                 </span>
               )}
-            </span>
-            {showFraction && (
-              <span
-                className={`text-sm font-medium ${getStatusColor(
-                  completionRate
-                )}`}
-              >
-                {completionRate.toFixed(1)}%
-              </span>
-            )}
+            </div>
+            <Progress value={completionRate} />
           </div>
-          <Progress value={completionRate} />
-        </div>
+        )}
 
         {/* Breakdown */}
         {breakdown && (

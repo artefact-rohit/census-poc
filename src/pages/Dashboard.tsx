@@ -89,7 +89,7 @@ const Dashboard = () => {
                 Registers-Based Census: Weekly Progress Report
               </h1>
               <p className="text-muted-foreground mt-1">
-                Week ending September 18, 2024
+                Week ending September 25, 2025
               </p>
             </div>
             <div className="flex items-center space-x-3">
@@ -124,29 +124,77 @@ const Dashboard = () => {
                 <CardTitle className="text-lg font-semibold">
                   Indicators
                 </CardTitle>
-                <div className="flex items-center space-x-2">
+                {/* <div className="flex items-center space-x-2">
                   {getTrendIcon(mockData.indicators.weeklyProgress)}
                   <span className="text-sm font-medium">
                     {mockData.indicators.weeklyProgress > 0 ? "+" : ""}
                     {mockData.indicators.weeklyProgress}% WoW
                   </span>
-                </div>
+                </div> */}
               </div>
-              <div className="mt-2">
-                <Select
-                  value={indicatorStatusFilter}
-                  onValueChange={setIndicatorStatusFilter}
+              <div className="mt-2 flex gap-2 flex-wrap">
+                <Button
+                  variant={
+                    indicatorStatusFilter === "not-started"
+                      ? "default"
+                      : "outline"
+                  }
+                  size="sm"
+                  onClick={() => setIndicatorStatusFilter("not-started")}
+                  className={`${
+                    indicatorStatusFilter === "not-started"
+                      ? "bg-muted text-muted-foreground hover:bg-muted/80"
+                      : "hover:bg-muted/50"
+                  }`}
                 >
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background border border-border z-50">
-                    <SelectItem value="not-started">Not Started</SelectItem>
-                    <SelectItem value="in-progress">In Progress</SelectItem>
-                    <SelectItem value="computed">Computed</SelectItem>
-                    <SelectItem value="validated">Validated</SelectItem>
-                  </SelectContent>
-                </Select>
+                  Not Started
+                </Button>
+                <Button
+                  variant={
+                    indicatorStatusFilter === "in-progress"
+                      ? "default"
+                      : "outline"
+                  }
+                  size="sm"
+                  onClick={() => setIndicatorStatusFilter("in-progress")}
+                  className={`${
+                    indicatorStatusFilter === "in-progress"
+                      ? "bg-status-warning text-status-warning-foreground hover:bg-status-warning/90"
+                      : "hover:bg-status-warning/20 border-status-warning/30"
+                  }`}
+                >
+                  In Progress
+                </Button>
+                <Button
+                  variant={
+                    indicatorStatusFilter === "computed" ? "default" : "outline"
+                  }
+                  size="sm"
+                  onClick={() => setIndicatorStatusFilter("computed")}
+                  className={`${
+                    indicatorStatusFilter === "computed"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "hover:bg-primary/20 border-primary/30"
+                  }`}
+                >
+                  Computed
+                </Button>
+                <Button
+                  variant={
+                    indicatorStatusFilter === "validated"
+                      ? "default"
+                      : "outline"
+                  }
+                  size="sm"
+                  onClick={() => setIndicatorStatusFilter("validated")}
+                  className={`${
+                    indicatorStatusFilter === "validated"
+                      ? "bg-status-success text-status-success-foreground hover:bg-status-success/90"
+                      : "hover:bg-status-success/20 border-status-success/30"
+                  }`}
+                >
+                  Validated
+                </Button>
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -398,6 +446,7 @@ const Dashboard = () => {
             weeklyProgress={mockData.datasets.weeklyProgress}
             plannedVsActual={mockData.datasets.actual}
             planned={mockData.datasets.planned}
+            hideProgressBar={true}
             breakdown={[
               {
                 label: "Access Secured",
@@ -433,13 +482,13 @@ const Dashboard = () => {
                 <CardTitle className="text-lg font-semibold">
                   Dissemination
                 </CardTitle>
-                <div className="flex items-center space-x-2">
+                {/* <div className="flex items-center space-x-2">
                   {getTrendIcon(mockData.dissemination.weeklyProgress)}
                   <span className="text-sm font-medium">
                     {mockData.dissemination.weeklyProgress > 0 ? "+" : ""}
                     {mockData.dissemination.weeklyProgress}% WoW
                   </span>
-                </div>
+                </div> */}
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -490,10 +539,10 @@ const Dashboard = () => {
             <CardTitle className="text-lg font-semibold">
               Actions & Support Needed
             </CardTitle>
-            <p className="text-sm text-muted-foreground mt-1">
+            {/* <p className="text-sm text-muted-foreground mt-1">
               Items requiring DG/SG attention - start weekly meetings with this
               section
-            </p>
+            </p> */}
           </CardHeader>
           <CardContent>
             <Table>

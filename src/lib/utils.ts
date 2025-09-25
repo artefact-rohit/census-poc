@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { atom } from "jotai";
 import { twMerge } from "tailwind-merge";
 import { atomWithStorage } from "jotai/utils";
+import { addDays, format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -53,8 +54,8 @@ const initialJsonData = {
         actual: 5.7,
       },
       registers: {
-        completed: 10,
-        total: 13,
+        completed: 7,
+        total: 100,
         baskets: {
           population: { completed: 7, total: 1 },
           sbr: { completed: 3, total: 10 },
@@ -80,15 +81,15 @@ const initialJsonData = {
         actual: 86.5,
       },
       dissemination: {
-        progress: 78,
+        progress: 0,
         weeklyProgress: 15,
         baskets: {
-          "ui/ux": "completed",
-          platform: "in-progress",
-          kpi: "not-started",
+          "ui/ux": "Initiates on 28th September",
+          platform: "Initiates on 27th October",
+          kpi: "Initiates on 16th November",
         },
-        planned: 8.5,
-        actual: 10.0,
+        planned: 0,
+        actual: 0,
       },
     },
     actionItems: [
@@ -129,23 +130,22 @@ const initialJsonData = {
   "census-indicators": [
     {
       id: "IND001",
-      name: "Total Population by Nationality",
-      basket: "Population",
-      status: "completed",
-      lastUpdate: "2024-09-15",
-      coverage: 98.5,
-      qdti: 94.2,
-      methodology:
-        "Direct count from Population Register with AI validation for duplicate detection and data quality assurance",
+      name: "Total Establishments by Establishment Type",
+      basket: "Establishments",
+      status: "in-progress",
+      lastUpdate: "2025-09-24",
+      coverage: 53,
+      qdti: 93,
+      methodology: "sef",
     },
     {
       id: "IND002",
-      name: "Household Size Distribution",
-      basket: "Family Characteristics",
-      status: "validated",
-      lastUpdate: "2024-09-14",
-      coverage: 97.8,
-      qdti: 96.1,
+      name: "Qatari Employee in Private Sector",
+      basket: "Establishments",
+      status: "in-progress",
+      lastUpdate: "2025-09-24",
+      coverage: 80,
+      qdti: 94,
       methodology:
         "Aggregated from household composition data using statistical modeling and cross-validation",
     },
@@ -336,10 +336,23 @@ const isEditingAtom = atom(false);
 const jsonStringAtom = atom(JSON.stringify(initialJsonData, null, 2));
 const validationErrorAtom = atom(null);
 
+function getNextWeekDate() {
+  const today = new Date();
+  const nextWeek = addDays(today, 7);
+  return format(nextWeek, "yyyy-MM-dd");
+}
+
+function getTodayDate() {
+  const today = new Date();
+  return format(today, "yyyy-MM-dd");
+}
+
 export {
   jsonDataAtom,
   jsonStringAtom,
   isEditingAtom,
   validationErrorAtom,
   initialJsonData,
+  getNextWeekDate,
+  getTodayDate,
 };

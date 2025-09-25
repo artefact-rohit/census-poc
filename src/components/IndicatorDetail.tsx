@@ -12,6 +12,14 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordian";
+import { addDays } from "date-fns";
+import { getNextWeekDate } from "@/lib/utils";
 
 interface Indicator {
   id: string;
@@ -221,7 +229,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
               </div>
               <div className="text-lg font-medium">{indicator.lastUpdate}</div>
               <div className="text-xs text-muted-foreground">
-                Next: 2025-10-01
+                Next: {getNextWeekDate()}
               </div>
             </div>
           </div>
@@ -229,46 +237,56 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
       </Card>
 
       {/* Methodology */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <FileText className="h-5 w-5" />
-            <span>Methodology</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p
-            className="text-muted-foreground"
-            dangerouslySetInnerHTML={{
-              __html: isQatariIndicator ? method2 : method1,
-            }}
-          ></p>
+      <Card className="pr-4">
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <FileText className="h-5 w-5" />
+                  <span>Methodology</span>
+                </CardTitle>
+              </CardHeader>
+            </AccordionTrigger>
+            <AccordionContent>
+              <CardContent>
+                <p
+                  className="text-muted-foreground"
+                  dangerouslySetInnerHTML={{
+                    __html: isQatariIndicator ? method2 : method1,
+                  }}
+                ></p>
 
-          <div className="grid grid-cols-1  gap-4 mt-4">
-            <div>
-              <h4 className="font-medium mb-2">Data Sources</h4>
-              <p
-                className="text-muted-foreground"
-                dangerouslySetInnerHTML={{
-                  __html: isQatariIndicator ? dataSource2 : dataSource1,
-                }}
-              ></p>
-            </div>
-          </div>
-          <div>
-            <h4 className="font-medium mb-2">Computation Details</h4>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Frequency:</span>
-                <span>{mockDetailData.computationFrequency}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Dependencies:</span>
-                <span>{mockDetailData.dependencies.length}</span>
-              </div>
-            </div>
-          </div>
-        </CardContent>
+                <div className="grid grid-cols-1  gap-4 mt-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Data Sources</h4>
+                    <p
+                      className="text-muted-foreground"
+                      dangerouslySetInnerHTML={{
+                        __html: isQatariIndicator ? dataSource2 : dataSource1,
+                      }}
+                    ></p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2">Computation Details</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Frequency:</span>
+                      <span>Weekly</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">
+                        Dependencies:
+                      </span>
+                      <span>{mockDetailData.dependencies.length}</span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </Card>
 
       {/* Tabulations - Actual Data */}
@@ -344,7 +362,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
       </Card>
 
       {/* Issues & Dependencies */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
@@ -354,28 +372,33 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
           </CardHeader>
           <CardContent>
             {(isQatariIndicator ? nextSteps2 : nextSteps1).length > 0 ? (
-              <div className="space-y-3">
-                {(isQatariIndicator ? nextSteps2 : nextSteps1).map(
-                  (issue, index) => (
-                    <div
-                      key={index}
-                      className="p-3 bg-status-warning/10 border border-status-warning/20 rounded-lg"
-                    >
-                      <p className="text-sm text-card-foreground">{issue}</p>
-                      {/* <p className="text-xs text-muted-foreground mt-1">
-                        ETA: {issue.eta}
-                      </p> */}
-                    </div>
-                  )
-                )}
-              </div>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2">Next steps</th>
+                    <th className="text-left py-2 w-[20%]">Dependencies</th>
+                    <th className="text-left py-2">Target Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(isQatariIndicator ? nextSteps2 : nextSteps1).map(
+                    (issue, index) => (
+                      <tr key={index} className="border-b border-border/50">
+                        <td className="py-2 ">{issue}</td>
+                        <td className="py-2 text-center">13883</td>
+                        <td className="py-2 text-center">13883</td>
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </table>
             ) : (
               <p className="text-sm text-muted-foreground">No active issues</p>
             )}
           </CardContent>
         </Card>
 
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <Clock className="h-5 w-5" />
@@ -395,7 +418,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
               ))}
             </div>
           </CardContent>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );
