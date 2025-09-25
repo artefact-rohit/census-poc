@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   const [resolvedItems, setResolvedItems] = useState<number[]>([]);
   const [indicatorStatusFilter, setIndicatorStatusFilter] =
-    useState("validated");
+    useState("calc-in-progress");
 
   const actionItems = getData.overview.actionItems;
 
@@ -147,7 +147,7 @@ const Dashboard = () => {
                   }
                   size="sm"
                   onClick={() => setIndicatorStatusFilter("not-started")}
-                  className={`${
+                  className={`h-[45px] ${
                     indicatorStatusFilter === "not-started"
                       ? "bg-muted text-muted-foreground hover:bg-muted/80"
                       : "hover:bg-muted/50"
@@ -157,19 +157,37 @@ const Dashboard = () => {
                 </Button>
                 <Button
                   variant={
-                    indicatorStatusFilter === "in-progress"
+                    indicatorStatusFilter === "method-in-progress"
                       ? "default"
                       : "outline"
                   }
                   size="sm"
-                  onClick={() => setIndicatorStatusFilter("in-progress")}
-                  className={`${
-                    indicatorStatusFilter === "in-progress"
+                  onClick={() => setIndicatorStatusFilter("method-in-progress")}
+                  className={`max-w-[150px] px-4 h-[45px] ${
+                    indicatorStatusFilter === "method-in-progress"
                       ? "bg-status-warning text-status-warning-foreground hover:bg-status-warning/90"
                       : "hover:bg-status-warning/20 border-status-warning/30"
                   }`}
                 >
-                  In Progress
+                  Methodology
+                  <br /> in progress
+                </Button>
+                <Button
+                  variant={
+                    indicatorStatusFilter === "calc-in-progress"
+                      ? "default"
+                      : "outline"
+                  }
+                  size="sm"
+                  onClick={() => setIndicatorStatusFilter("calc-in-progress")}
+                  className={`max-w-[150px] px-4 h-[45px] ${
+                    indicatorStatusFilter === "calc-in-progress"
+                      ? "bg-status-warning text-status-warning-foreground hover:bg-status-warning/90"
+                      : "hover:bg-status-warning/20 border-status-warning/30"
+                  }`}
+                >
+                  Calculation
+                  <br /> in Progress
                 </Button>
                 <Button
                   variant={
@@ -177,7 +195,7 @@ const Dashboard = () => {
                   }
                   size="sm"
                   onClick={() => setIndicatorStatusFilter("computed")}
-                  className={`${
+                  className={` h-[45px] ${
                     indicatorStatusFilter === "computed"
                       ? "bg-primary text-primary-foreground hover:bg-primary/90"
                       : "hover:bg-primary/20 border-primary/30"
@@ -193,7 +211,7 @@ const Dashboard = () => {
                   }
                   size="sm"
                   onClick={() => setIndicatorStatusFilter("validated")}
-                  className={`${
+                  className={` h-[45px] ${
                     indicatorStatusFilter === "validated"
                       ? "bg-status-success text-status-success-foreground hover:bg-status-success/90"
                       : "hover:bg-status-success/20 border-status-success/30"
