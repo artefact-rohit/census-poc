@@ -48,11 +48,10 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const dataSource1 = `<table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" data-sheets-baot="1"><colgroup><col width="547" /><col width="34" /><col width="100" /><col width="100" /><col width="100" /></colgroup>
 <tbody>
 <tr>
-<td colspan="5" rowspan="1"><strong>MOCI</strong><br /> - Commercial establishments characteristics with active status for the establishment<br /> <br /> <strong>CGB</strong><br /> - Supplies data on the public sector workforce<br /><br /> <strong>QFZ</strong><br /> - Supplies data on Qatar Free Zone establishments <br /><br /> <strong>QFC</strong><br /> - Supplies establishment data for Qatar Financial Center<br /><br /> <strong>QSTP</strong><br /> - Qatar Science &amp; Technology Park is a source for international technology establishments within Qatar</td>
+<td colspan="5" rowspan="1"><strong>MOCI (Integrated)</strong> <br /> - Ministry of Commerce and Industry <br /><br /> <strong>QFZ (Not Integrated)</strong><br /> - Qatar Free Zone<br /><br /> <strong>QFC (Integrated)</strong><br /> - Qatar Financial Center<br /><br /> <strong>QSTP (Not Integrated)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /> <strong>MOM (Integrated, additional dataset required)</strong><br /> - Ministry of Municipality<br /><br /> <strong>MOI (Integrated)</strong><br /> - Ministry of Interiors<br /><br /> <strong>GRSIA (Integrated)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /> <strong>KAHRAMAA (Integrated)</strong><br />- Qatar General Electricity &amp; Water Corporation</td>
 </tr>
 </tbody>
-</table>
-<p>&nbsp;</p>`;
+</table>`;
 
   const method2 = `<table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" data-sheets-baot="1"><colgroup><col width="723" /><col width="34" /><col width="100" /><col width="100" /></colgroup>
 <tbody>
@@ -66,7 +65,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const dataSource2 = `<table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" data-sheets-baot="1"><colgroup><col width="432" /><col width="41" /><col width="100" /><col width="100" /><col width="100" /></colgroup>
 <tbody>
 <tr>
-<td colspan="5" rowspan="1"><strong>GRSIA</strong><br /> -Employment Information for establishments for Qatari Employees<br /> <br /> <strong>QFC</strong><br /> -Employment Information for financial establishments in Qatar<br /> <br /> <strong>QFZ</strong><br /> -Employees working under Qatar Free Zone authority</td>
+<td colspan="5" rowspan="1"><strong>GRSIA (Integrated)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /><strong>QFC (Integrated, additional dataset required)</strong><br />- Qatar Financial Center<br /><br /><strong>QFZ (Not Integrated)</strong><br />- Qatar Financial Zone<br /><br /><strong>QSTP (Not Integrated)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /><strong>MOPH (Integrated)</strong><br /> - Ministry of Public Health</td>
 </tr>
 </tbody>
 </table>
@@ -119,6 +118,16 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
     {
       nextStep: "Request employment datasets from QFC",
       dependency: "QFC",
+      targetDate: "2025-09-25",
+    },
+    {
+      nextStep: "Request employment datasets from QFZ",
+      dependency: "QFZ",
+      targetDate: "2025-09-25",
+    },
+    {
+      nextStep: "Request employment datasets from QSTP",
+      dependency: "QSTP",
       targetDate: "2025-09-25",
     },
     {
@@ -193,7 +202,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       indicator.coverage
                     )}`}
                   >
-                    {isQatariIndicator ? "13,883 - 14,008" : "84,284 - 105,375"}
+                    {isQatariIndicator ? "13,883 - 14,008" : "84,284 - 105,486"}
                   </span>
                   {/* <span className="text-sm text-status-success">
                     +{mockDetailData.weeklyChange.coverage}% WoW
@@ -287,7 +296,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       <tbody>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Commercial</td>
-                          <td className="text-right py-2">71921</td>
+                          <td className="text-right py-2">105,375</td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Government</td>
@@ -296,7 +305,9 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 
                         <tr>
                           <td className="py-2 font-medium">Total</td>
-                          <td className="text-right py-2 font-medium">72032</td>
+                          <td className="text-right py-2 font-medium">
+                            105,486
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -308,68 +319,13 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             <div className="mt-6 p-4 bg-secondary/30 rounded-lg">
               <p className="text-sm text-muted-foreground">
                 <strong>Data Notes:</strong> Figures are preliminary and based
-                on current register confidence of {indicator.coverage}%. Final
+                on current register confidence of {indicator.coverage}. Final
                 tabulations will be available upon completion of all data
                 validation processes.
               </p>
             </div>
           </div>
         </CardContent>
-      </Card>
-
-      {/* Methodology */}
-      <Card className="pr-4">
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <FileText className="h-5 w-5" />
-                  <span>Methodology</span>
-                </CardTitle>
-              </CardHeader>
-            </AccordionTrigger>
-            <AccordionContent>
-              <CardContent>
-                <p
-                  className="text-muted-foreground"
-                  dangerouslySetInnerHTML={{
-                    __html: isQatariIndicator ? method2 : method1,
-                  }}
-                ></p>
-
-                <div className="grid grid-cols-1  gap-4 mt-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Data Sources</h4>
-                    <p
-                      className="text-muted-foreground"
-                      dangerouslySetInnerHTML={{
-                        __html: isQatariIndicator ? dataSource2 : dataSource1,
-                      }}
-                    ></p>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-2">Computation Details</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Frequency:</span>
-                      <span>Weekly</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">
-                        Dependencies:
-                      </span>
-                      <span>
-                        {(isQatariIndicator ? mainData2 : mainData1).length}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
       </Card>
 
       {/* Issues & Dependencies */}
@@ -431,6 +387,62 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
           </CardContent>
         </Card> */}
       </div>
+
+      {/* Methodology */}
+      <Card className="pr-4">
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <FileText className="h-5 w-5" />
+                  <span>Methodology</span>
+                </CardTitle>
+              </CardHeader>
+            </AccordionTrigger>
+            <AccordionContent>
+              <CardContent>
+                <p
+                  className="text-muted-foreground"
+                  dangerouslySetInnerHTML={{
+                    __html: isQatariIndicator ? method2 : method1,
+                  }}
+                ></p>
+
+                <div className="grid grid-cols-1  gap-4 mt-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Data Sources</h4>
+                    <p
+                      className="text-muted-foreground"
+                      dangerouslySetInnerHTML={{
+                        __html: isQatariIndicator ? dataSource2 : dataSource1,
+                      }}
+                    ></p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 mt-4">Computation Details</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Frequency:</span>
+                      <span>Weekly</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">
+                        Dependencies:
+                      </span>
+                      <span>
+                        {(isQatariIndicator ? mainData2 : mainData1).length}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </Card>
+      <div className="h-4"></div>
     </div>
   );
 };

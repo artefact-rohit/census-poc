@@ -220,7 +220,7 @@ export const IndicatorList = ({
 
               <div className="flex justify-between items-center mt-2 text-xs">
                 <span className="text-muted-foreground">
-                  Confidence: {indicator.coverage}%
+                  Confidence Range: {indicator.coverage}
                 </span>
                 <span className="text-muted-foreground">
                   QDTI: {indicator.qdti}%

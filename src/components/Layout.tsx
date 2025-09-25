@@ -36,7 +36,7 @@ export const Layout = ({ children }: LayoutProps) => {
               <div className="flex items-center space-x-2">
                 <Building2 className="h-8 w-8 text-primary" />
                 <span className="text-xl font-bold text-card-foreground">
-                  NPC Census
+                  Census Project Hub
                 </span>
               </div>
 
