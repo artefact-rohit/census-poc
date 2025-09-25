@@ -16,7 +16,8 @@ const initialJsonData = {
         completed: 98,
         total: 131,
         notStarted: 116,
-        inProgress: 15,
+        calcInProgress: 15,
+        methodInProgress: 15,
         computed: 0,
         validated: 0,
         baskets: {
@@ -27,7 +28,14 @@ const initialJsonData = {
             buildings: { completed: 16, total: 23 },
             establishments: { completed: 12, total: 16 },
           },
-          "in-progress": {
+          "calc-in-progress": {
+            population: { completed: 4, total: 34 },
+            family: { completed: 0, total: 17 },
+            economic: { completed: 0, total: 41 },
+            buildings: { completed: 7, total: 23 },
+            establishments: { completed: 4, total: 16 },
+          },
+          "method-in-progress": {
             population: { completed: 4, total: 34 },
             family: { completed: 0, total: 17 },
             economic: { completed: 0, total: 41 },
@@ -64,7 +72,7 @@ const initialJsonData = {
         },
         weeklyProgress: 8.5,
         planned: 5.0,
-        actual: 6.0,
+        actual: 7.0,
       },
       datasets: {
         acquired: 45,
@@ -117,9 +125,9 @@ const initialJsonData = {
       name: "Total Establishments by Establishment Type",
       basket: "Establishments",
       status: "in-progress",
-      lastUpdate: "2025-09-24",
-      coverage: 53,
-      qdti: 93,
+      lastUpdate: "2025-08-11",
+      coverage: "84,284 - 105,486",
+      qdti: 91,
       methodology: "sef",
     },
     {
@@ -127,9 +135,9 @@ const initialJsonData = {
       name: "Qatari Employee in Private Sector",
       basket: "Establishments",
       status: "in-progress",
-      lastUpdate: "2025-09-24",
-      coverage: 80,
-      qdti: 94,
+      lastUpdate: "2025-08-11",
+      coverage: "13,883 - 14,008",
+      qdti: 96,
       methodology:
         "Aggregated from household composition data using statistical modeling and cross-validation",
     },

@@ -65,8 +65,10 @@ const Dashboard = () => {
   };
 
   const getIndicatorTotal = () => {
-    return indicatorStatusFilter == "in-progress"
-      ? mockData.indicators.inProgress
+    return indicatorStatusFilter == "calc-in-progress"
+      ? mockData.indicators.calcInProgress
+      : indicatorStatusFilter == "method-in-progress"
+      ? mockData.indicators.methodInProgress
       : indicatorStatusFilter == "not-started"
       ? mockData.indicators.notStarted
       : indicatorStatusFilter == "computed"
