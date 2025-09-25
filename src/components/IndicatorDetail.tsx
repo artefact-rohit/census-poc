@@ -75,40 +75,63 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const mainData1 = [
     {
       nextStep:
-        "We are observing incosistencies between MOI and MOCI data and our current hypothesis MoCI is not updated with deregistered, we are validating with our experrts and weill update numbers",
-      dependency: "sdafsaf",
-      targetDate: "2024-10-10",
-    },
-    {
-      nextStep: "Get data from QFZ, QSTP",
-      dependency: "sdafsaf",
-      targetDate: "2024-10-10",
+        "Secure access to the right MoCI and MoI databases from Wassim Qasim to get the latest updated data",
+      dependency: "N/A",
+      targetDate: "2025-09-25",
     },
     {
       nextStep:
-        "Due to the masking of establishment names in the CGB, the exact number of unique establishments cannot be accurately determined",
-      dependency: "sdafsaf",
-      targetDate: "2024-10-10",
+        "Reach out to MoCI to address the data gaps for missing establishment status (active or inactive) for x establishments ",
+      dependency: "MoCI",
+      targetDate: "2025-09-25",
+    },
+    {
+      nextStep: "Request establishment datasets from QFZ",
+      dependency: "QFZ",
+      targetDate: "2025-09-25",
+    },
+    {
+      nextStep: "Request the latest establishment datasets from QSTP",
+      dependency: "QSTP",
+      targetDate: "2025-09-25",
     },
     {
       nextStep:
-        "MOCI can leverage AI to identify whether a Establishment is public or private(Google place, NLP to check establishment website using establishment name)",
-      dependency: "sdafsaf",
-      targetDate: "2024-10-10",
+        "Define farm eligibility criteria to be considered as establishment and request MOM to share the farm records to populate the existing table (current status: Farm table exists but empty)",
+      dependency: "MOM",
+      targetDate: "2025-09-25",
+    },
+    {
+      nextStep:
+        "Prototype big data use case to curate the google places data for establishments in Qatar, and classify between establishment types (private vs public) leveragin GenAI capabilities to serve as validation mechanism",
+      dependency: "N/A",
+      targetDate: "2025-10-19",
+    },
+    {
+      nextStep:
+        "Document the underlying indicator computation methodology following Establishments register - UNEC, ILO and UN Standards",
+      dependency: "N/A",
+      targetDate: "2025-10-30",
     },
   ];
 
   const mainData2 = [
     {
-      nextStep: "Request data for QFZ",
-      dependency: "sdafsaf",
-      targetDate: "2024-10-10",
+      nextStep: "Request employment datasets from QFC",
+      dependency: "QFC",
+      targetDate: "2025-09-25",
     },
     {
       nextStep:
-        "Unmask establishment name in QFC to integrate with GRSIA for coverage",
-      dependency: "sdafsaf",
-      targetDate: "2024-10-10",
+        "Finalize the data gaps from GRSIA and request for updates- current identified data gaps include duplications (1.8%)",
+      dependency: "GRSIA",
+      targetDate: "2025-09-28",
+    },
+    {
+      nextStep:
+        "Document the underlying indicator computation methodology following Employment register - ILO and UN Standards",
+      dependency: "N/A",
+      targetDate: "2025-10-30",
     },
   ];
 
@@ -222,61 +245,6 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
         </CardContent>
       </Card>
 
-      {/* Methodology */}
-      <Card className="pr-4">
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <FileText className="h-5 w-5" />
-                  <span>Methodology</span>
-                </CardTitle>
-              </CardHeader>
-            </AccordionTrigger>
-            <AccordionContent>
-              <CardContent>
-                <p
-                  className="text-muted-foreground"
-                  dangerouslySetInnerHTML={{
-                    __html: isQatariIndicator ? method2 : method1,
-                  }}
-                ></p>
-
-                <div className="grid grid-cols-1  gap-4 mt-4">
-                  <div>
-                    <h4 className="font-medium mb-2">Data Sources</h4>
-                    <p
-                      className="text-muted-foreground"
-                      dangerouslySetInnerHTML={{
-                        __html: isQatariIndicator ? dataSource2 : dataSource1,
-                      }}
-                    ></p>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-medium mb-2">Computation Details</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Frequency:</span>
-                      <span>Weekly</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">
-                        Dependencies:
-                      </span>
-                      <span>
-                        {(isQatariIndicator ? mainData2 : mainData1).length}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </Card>
-
       {/* Tabulations - Actual Data */}
       <Card>
         <CardHeader>
@@ -349,13 +317,68 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
         </CardContent>
       </Card>
 
+      {/* Methodology */}
+      <Card className="pr-4">
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <FileText className="h-5 w-5" />
+                  <span>Methodology</span>
+                </CardTitle>
+              </CardHeader>
+            </AccordionTrigger>
+            <AccordionContent>
+              <CardContent>
+                <p
+                  className="text-muted-foreground"
+                  dangerouslySetInnerHTML={{
+                    __html: isQatariIndicator ? method2 : method1,
+                  }}
+                ></p>
+
+                <div className="grid grid-cols-1  gap-4 mt-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Data Sources</h4>
+                    <p
+                      className="text-muted-foreground"
+                      dangerouslySetInnerHTML={{
+                        __html: isQatariIndicator ? dataSource2 : dataSource1,
+                      }}
+                    ></p>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2">Computation Details</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Frequency:</span>
+                      <span>Weekly</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">
+                        Dependencies:
+                      </span>
+                      <span>
+                        {(isQatariIndicator ? mainData2 : mainData1).length}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </Card>
+
       {/* Issues & Dependencies */}
       <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
               <AlertCircle className="h-5 w-5 text-status-warning" />
-              <span>Next Steps</span>
+              <span>Next Steps & Dependencies</span>
             </CardTitle>
           </CardHeader>
           <CardContent>

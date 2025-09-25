@@ -19,6 +19,7 @@ interface SummaryCardProps {
   breakdown?: BreakdownItem[];
   showFraction?: boolean;
   hideProgressBar?: boolean;
+  hideTotal?: boolean;
 }
 
 export const SummaryCard = ({
@@ -31,6 +32,7 @@ export const SummaryCard = ({
   breakdown,
   showFraction = true,
   hideProgressBar = false,
+  hideTotal = false,
 }: SummaryCardProps) => {
   const completionRate = (completed / total) * 100;
 
@@ -109,6 +111,8 @@ export const SummaryCard = ({
                     <span className="text-sm font-medium">
                       {item.isPercentage
                         ? `${item.value.toFixed(1)}%`
+                        : hideTotal
+                        ? `${item.value}`
                         : `${item.value}/${item.total}`}
                     </span>
                     <div className="w-16">

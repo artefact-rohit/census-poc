@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -392,7 +398,7 @@ const Dashboard = () => {
               </div>
 
               {/* Planned vs Actual */}
-              <div className="pt-2 border-t border-border">
+              <div className="pt-2  border-t border-border">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">
                     Planned: {mockData.indicators.planned}% | Actual:{" "}
@@ -403,7 +409,72 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <SummaryCard
+          <Card className="shadow-sm">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg font-semibold">
+                  Registers
+                </CardTitle>
+                {/* <div className="flex items-center space-x-2">
+            {getTrendIcon(weeklyProgress)}
+            <span className="text-sm font-medium">
+              {weeklyProgress > 0 ? "+" : ""}
+              {weeklyProgress}% WoW
+            </span>
+          </div> */}
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Main Progress */}
+              <div className="space-y-2 ">
+                <div className="flex justify-between items-end">
+                  <span className="text-2xl font-bold text-card-foreground">
+                    <span className={`text-status-success`}>
+                      {mockData.registers.completed.toFixed(1)}%
+                    </span>
+                  </span>
+                </div>
+                <Progress value={mockData.registers.completed} />
+              </div>
+
+              {/* Breakdown */}
+              <div className="space-y-2 pb-12">
+                <h4 className="text-sm font-medium text-card-foreground">
+                  Update
+                </h4>
+
+                <div className="pt-0.5 space-y-2">
+                  <ul className="pl-5">
+                    {[
+                      "Core registers (Population & Households, Buildings, Establishments) are being designed in collaboration with subject-matter expert, in alignment with international standards",
+                      "Specific methodology is being developed at field level",
+                      "Full completion of design is expected by 30 November 2025",
+                    ].map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center justify-between pb-2"
+                      >
+                        <span className="text-sm text-muted-foreground">
+                          - {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Planned vs Actual */}
+              <div className="pt-2  border-t  border-border">
+                <div className="flex justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    {`Planned: ${mockData.registers.planned}% | Actual: ${mockData.registers.actual}%`}
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* <SummaryCard
             title="Registers"
             completed={mockData.registers.completed}
             total={mockData.registers.total}
@@ -411,33 +482,8 @@ const Dashboard = () => {
             plannedVsActual={mockData.registers.actual}
             planned={mockData.registers.planned}
             showFraction={false}
-            breakdown={[
-              {
-                label: "Population & Household",
-                value: mockData.registers.baskets.population.completed,
-                total: mockData.registers.baskets.population.total,
-                isPercentage: true,
-              },
-              {
-                label: "Buildings & Units",
-                value: mockData.registers.baskets.buildings.completed,
-                total: mockData.registers.baskets.buildings.total,
-                isPercentage: true,
-              },
-              {
-                label: "Establishments",
-                value: mockData.registers.baskets.establishments.completed,
-                total: mockData.registers.baskets.establishments.total,
-                isPercentage: true,
-              },
-              {
-                label: "SBR (Secondary)",
-                value: mockData.registers.baskets.sbr.completed,
-                total: mockData.registers.baskets.sbr.total,
-                isPercentage: true,
-              },
-            ]}
-          />
+            breakdown={}
+          /> */}
 
           <SummaryCard
             title="Datasets"
@@ -447,31 +493,24 @@ const Dashboard = () => {
             plannedVsActual={mockData.datasets.actual}
             planned={mockData.datasets.planned}
             hideProgressBar={true}
+            hideTotal={true}
             breakdown={[
               {
                 label: "Access Secured",
-                value: mockData.datasets.byStatus.accessSecured,
-                total: mockData.datasets.total,
+                value: mockData.datasets.byStatus.accessSecured.completed,
+                total: mockData.datasets.byStatus.accessSecured.total,
+              },
+
+              {
+                label: "Requested",
+                value: mockData.datasets.byStatus.requested.completed,
+                total: mockData.datasets.byStatus.requested.total,
               },
               {
-                label: "Integrated",
-                value: mockData.datasets.byStatus.integrated,
-                total: mockData.datasets.total,
-              },
-              {
-                label: "Quality Assured",
-                value: mockData.datasets.byStatus.qualityAssured,
-                total: mockData.datasets.total,
-              },
-              {
-                label: "Validated",
-                value: mockData.datasets.byStatus.validated,
-                total: mockData.datasets.total,
-              },
-              {
-                label: "Not Started",
-                value: mockData.datasets.byStatus.notStarted,
-                total: mockData.datasets.total,
+                label: "Validation In Progress",
+                value:
+                  mockData.datasets.byStatus.validationInProgress.completed,
+                total: mockData.datasets.byStatus.validationInProgress.total,
               },
             ]}
           />
@@ -537,7 +576,7 @@ const Dashboard = () => {
         <Card className="shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              Actions & Support Needed
+              Actions Items
             </CardTitle>
             {/* <p className="text-sm text-muted-foreground mt-1">
               Items requiring DG/SG attention - start weekly meetings with this
@@ -549,6 +588,7 @@ const Dashboard = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Item</TableHead>
+                  <TableHead>Topic</TableHead>
                   <TableHead>Owner</TableHead>
                   <TableHead>Criticality</TableHead>
                   <TableHead>Status</TableHead>
@@ -565,6 +605,7 @@ const Dashboard = () => {
                     }
                   >
                     <TableCell className="font-medium">{item.item}</TableCell>
+                    <TableCell>{item.topic}</TableCell>
                     <TableCell>{item.owner}</TableCell>
                     <TableCell>
                       {getCriticalityBadge(item.criticality)}
