@@ -115,16 +115,18 @@ export const SummaryCard = ({
                         ? `${item.value}`
                         : `${item.value}/${item.total}`}
                     </span>
-                    <div className="w-16">
-                      <Progress
-                        value={
-                          item.isPercentage
-                            ? item.value
-                            : (item.value / item.total) * 100
-                        }
-                        className="h-1.5"
-                      />
-                    </div>
+                    {hideTotal ? null : (
+                      <div className="w-16">
+                        <Progress
+                          value={
+                            item.isPercentage
+                              ? item.value
+                              : (item.value / item.total) * 100
+                          }
+                          className="h-1.5"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -133,15 +135,17 @@ export const SummaryCard = ({
         )}
 
         {/* Planned vs Actual */}
-        <div className="pt-2 border-t border-border">
-          <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
-              {planned
-                ? `Planned: ${planned}% | Actual: ${plannedVsActual}%`
-                : `Planned vs Actual: ${plannedVsActual}%`}
-            </span>
+        {hideTotal ? null : (
+          <div className="pt-2 border-t border-border">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">
+                {planned
+                  ? `Planned: ${planned}% | Actual: ${plannedVsActual}%`
+                  : `Planned vs Actual: ${plannedVsActual}%`}
+              </span>
+            </div>
           </div>
-        </div>
+        )}
       </CardContent>
     </Card>
   );

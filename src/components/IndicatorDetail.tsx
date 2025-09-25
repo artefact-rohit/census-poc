@@ -184,7 +184,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Target className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm font-medium">Confidence</span>
+                <span className="text-sm font-medium">Confidence Range</span>
               </div>
               <div className="space-y-1">
                 <div className="flex justify-between">
@@ -193,13 +193,13 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       indicator.coverage
                     )}`}
                   >
-                    {indicator.coverage}%
+                    {isQatariIndicator ? "13,883 - 14,008" : "84,284 - 105,375"}
                   </span>
                   {/* <span className="text-sm text-status-success">
                     +{mockDetailData.weeklyChange.coverage}% WoW
                   </span> */}
                 </div>
-                <Progress value={indicator.coverage} />
+                {/* <Progress value={indicator.coverage} /> */}
                 {/* <div className="text-xs text-muted-foreground">
                   Planned vs Actual: {mockDetailData.plannedVsActual.coverage}%
                 </div> */}
