@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -36,6 +36,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+const COLORS = [
+  "#323F4B",
+  "#F5E7AC",
+  "#845EC2",
+  "#E9AEBB",
+  "#0D1833",
+  "#B3D6C6",
+];
 
 const Dashboard = () => {
   // Mock data for demonstration
@@ -85,6 +103,23 @@ const Dashboard = () => {
       return <TrendingDown className="h-4 w-4 text-status-danger" />;
     return <Minus className="h-4 w-4 text-muted-foreground" />;
   };
+
+  const [datasetChartData, setDatasetChartData] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (getData.overview.cardData.datasets) {
+      setDatasetChartData(getData.overview.cardData.datasets.byStatus);
+    }
+  }, [getData]);
+
+  const keys = [
+    "To be requested",
+    "Access requested",
+    "Access secured",
+    "Integration in progress",
+    "Validation in progress",
+    "Validated",
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -505,35 +540,61 @@ const Dashboard = () => {
             breakdown={}
           /> */}
 
-          <SummaryCard
-            title="Datasets"
-            completed={mockData.datasets.acquired}
-            total={mockData.datasets.total}
-            weeklyProgress={mockData.datasets.weeklyProgress}
-            plannedVsActual={mockData.datasets.actual}
-            planned={mockData.datasets.planned}
-            hideProgressBar={true}
-            hideTotal={true}
-            breakdown={[
-              {
-                label: "Access Secured",
-                value: mockData.datasets.byStatus.accessSecured.completed,
-                total: mockData.datasets.byStatus.accessSecured.total,
-              },
-
-              {
-                label: "Requested",
-                value: mockData.datasets.byStatus.requested.completed,
-                total: mockData.datasets.byStatus.requested.total,
-              },
-              {
-                label: "Validation In Progress",
-                value:
-                  mockData.datasets.byStatus.validationInProgress.completed,
-                total: mockData.datasets.byStatus.validationInProgress.total,
-              },
-            ]}
-          />
+          <Card className="shadow-sm">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg font-semibold">
+                  Datasets
+                </CardTitle>
+                {/* <div className="flex items-center space-x-2">
+            {getTrendIcon(weeklyProgress)}
+            <span className="text-sm font-medium">
+              {weeklyProgress > 0 ? "+" : ""}
+              {weeklyProgress}% WoW
+            </span>
+          </div> */}
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4  ">
+              <ResponsiveContainer width="100%" height={150}>
+                <BarChart
+                  data={datasetChartData}
+                  layout="vertical"
+                  barCategoryGap="20%"
+                  margin={{ left: 20, right: 10, top: 20, bottom: 10 }}
+                >
+                  <XAxis type="number" hide />
+                  <YAxis
+                    dataKey="name"
+                    type="category"
+                    tick={{ fontSize: 14 }}
+                  />
+                  <Tooltip />
+                  {keys.map((key, idx) => (
+                    <Bar
+                      key={key}
+                      dataKey={key}
+                      stackId="a"
+                      fill={COLORS[idx]}
+                      // radius={[0, 4, 4, 0]}
+                    />
+                  ))}
+                </BarChart>
+              </ResponsiveContainer>
+              {/* Legend */}
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {keys.map((key, idx) => (
+                  <div key={key} className="flex items-center gap-2 mr-2">
+                    <span
+                      className="inline-block w-4 h-4 rounded-full"
+                      style={{ backgroundColor: COLORS[idx] }}
+                    />
+                    <span className="text-muted-foreground text-sm">{key}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
           <Card className="shadow-sm">
             <CardHeader className="pb-3">
