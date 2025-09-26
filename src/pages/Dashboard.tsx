@@ -565,7 +565,8 @@ const Dashboard = () => {
                 >
                   <XAxis type="number" hide />
                   <YAxis
-                    dataKey="name"
+                    dataKey=""
+                    hide
                     type="category"
                     tick={{ fontSize: 14 }}
                   />
