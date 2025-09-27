@@ -29,6 +29,10 @@ export const PopulationGraphTemp = () => {
 
   // Tooltip state and handlers remain unchanged
 
+  const tooltipValue = Math.round(
+    parseFloat(tooltip.value?.split("%")?.[0]) * 138.87
+  ).toFixed(0);
+
   return (
     <div className="w-full bg-white">
       <div className="text-center sm:text-lg md:text-xl font-bold text-gray-700 mb-4">
@@ -51,7 +55,7 @@ export const PopulationGraphTemp = () => {
             zIndex: 1000,
           }}
         >
-          {`Count: ${tooltip.value}`}
+          {`Count: ${tooltipValue}`}
         </div>
       )}
       <div className="max-w-7xl ">

@@ -52,7 +52,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const dataSource1 = `<table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" data-sheets-baot="1"><colgroup><col width="547" /><col width="34" /><col width="100" /><col width="100" /><col width="100" /></colgroup>
 <tbody>
 <tr>
-<td colspan="5" rowspan="1"><strong>MOCI (<span style="color: #339966;">Integrated</span>)</strong> <br /> - Ministry of Commerce and Industry <br /><br /> <strong>QFZ (<span style="color: #ff0000;">Not Integrated</span>)</strong><br /> - Qatar Free Zone<br /><br /> <strong>QFC (<span style="color: #339966;">Integrated</span>)</strong><br /> - Qatar Financial Center<br /><br /> <strong>QSTP (<span style="color: #ff0000;">Not Integrated</span>)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /> <strong>MOM (<span style="color: #ff6600;">Integrated, additional dataset required</span>)</strong><br /> - Ministry of Municipality<br /><br /> <strong>MOI (<span style="color: #339966;">Integrated</span>)</strong><br /> - Ministry of Interiors<br /><br /> <strong>GRSIA (<span style="color: #339966;">Integrated</span>)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /> <strong>KAHRAMAA (<span style="color: #339966;">Integrated</span>)</strong><br />- Qatar General Electricity &amp; Water Corporation</td>
+<td colspan="5" rowspan="1"><strong>MOCI (<span style="color: #339966;">Integrated</span>)</strong> <br /> - Ministry of Commerce and Industry <br /><br /> <strong>QFZ (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Free Zone<br /><br /> <strong>QFC (<span style="color: #339966;">Integrated</span>)</strong><br /> - Qatar Financial Center<br /><br /> <strong>QSTP (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /> <strong>MOM (<span style="color: #ff6600;">Integrated, additional dataset required</span>)</strong><br /> - Ministry of Municipality<br /><br /> <strong>MOI (<span style="color: #339966;">Integrated</span>)</strong><br /> - Ministry of Interiors<br /><br /> <strong>GRSIA (<span style="color: #339966;">Integrated</span>)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /> <strong>KAHRAMAA (<span style="color: #339966;">Integrated</span>)</strong><br />- Qatar General Electricity &amp; Water Corporation</td>
 </tr>
 </tbody>
 </table>`;
@@ -69,7 +69,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const dataSource2 = `<table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" data-sheets-baot="1"><colgroup><col width="432" /><col width="41" /><col width="100" /><col width="100" /><col width="100" /></colgroup>
 <tbody>
 <tr>
-<td colspan="5" rowspan="1"><strong>GRSIA (<span style="color: #339966;">Integrated</span>)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /><strong>QFC (<span style="color: #ff6600;">Integrated, additional dataset required</span>)</strong><br />- Qatar Financial Center<br /><br /><strong>QFZ (<span style="color: #ff0000;">Not Integrated</span>)</strong><br />- Qatar Financial Zone<br /><br /><strong>QSTP (<span style="color: #ff0000;">Not Integrated</span>)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /><strong>MOPH (<span style="color: #339966;">Integrated</span>)</strong><br /> - Ministry of Public Health</td>
+<td colspan="5" rowspan="1"><strong>GRSIA (<span style="color: #339966;">Integrated</span>)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /><strong>QFC (<span style="color: #ff6600;">Integrated, additional dataset required</span>)</strong><br />- Qatar Financial Center<br /><br /><strong>QFZ (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br />- Qatar Financial Zone<br /><br /><strong>QSTP (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /><strong>MOPH (<span style="color: #339966;">Integrated</span>)</strong><br /> - Ministry of Public Health</td>
 </tr>
 </tbody>
 </table>
@@ -77,8 +77,8 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 
   const mainData1 = [
     {
-      nextStep: `<p><span data-sheets-root="1"><strong>Consolidate Establishment Data into a Unified Statistical Register</strong><br />Move from fragmented administrative records toward a single, authoritative register of establishments.<br />-Secure access to updated MoCI and MoI databases for latest establishment records.<br />-Request establishment datasets from QFZ, QSTP, and QFC to capture specialized economic activities.<br />-Request unmasked establishment names and identifiers from CGB to accurately classify government units.</span></p>`,
-      dependency: "MOCI, MOI, QFZ, QSTP, QFC, CGB",
+      nextStep: `<p><span data-sheets-root="1"><strong>Consolidate Establishment Data into a Unified Statistical Register</strong><br />Move from fragmented administrative records toward a single, authoritative register of establishments.<br />-Secure access to updated MoCI and MoI databases for latest establishment records.<br />-Request establishment datasets from QFZ and QSTP to capture specialized economic activities.<br />-Request unmasked establishment names and identifiers from CGB to accurately classify government units.</span></p>`,
+      dependency: "MOCI, MOI, QFZ, QSTP, CGB",
       targetDate: "2025-09-28",
     },
     {
@@ -190,7 +190,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <BarChart3 className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm font-medium">QDTI Score</span>
+                <span className="text-sm font-medium">QDTI Score*</span>
               </div>
               <div className="space-y-1">
                 <div className="flex justify-between">
@@ -222,6 +222,10 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                 Next: {getNextWeekDate()}
               </div>
             </div>
+          </div>
+          <div className="mt-4 text-xs text-muted-foreground">
+            *Data Sources :{" "}
+            {isQatariIndicator ? "GRSIA" : "MOCI, QFC, GRSIA, KAHRAMAA"}
           </div>
         </CardContent>
       </Card>
@@ -267,15 +271,25 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <td className="text-right py-2">3241</td>
                           <td className="text-right py-2">4215</td>
                         </tr>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2 font-semibold">Total</td>
+                          <td className="text-right py-2 font-semibold">
+                            13,887
+                          </td>
+                          <td className="text-right py-2 font-semibold">
+                            8,511
+                          </td>
+                          <td className="text-right py-2 font-semibold">
+                            10,724
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   ) : (
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-border">
-                          <th className="text-left py-2">
-                            Total Establishment
-                          </th>
+                          <th className="text-left py-2">Establishment</th>
                           <th className="text-right py-2">
                             2025 Census (Preliminary)
                           </th>
@@ -292,6 +306,15 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <td className="py-2">Non-Government</td>
                           <td className="text-right py-2">108,516</td>
                           <td className="text-right py-2">70,886</td>
+                        </tr>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2 font-semibold">Total</td>
+                          <td className="text-right py-2 font-semibold">
+                            108,793
+                          </td>
+                          <td className="text-right py-2 font-semibold">
+                            73,938
+                          </td>
                         </tr>
                       </tbody>
                     </table>
