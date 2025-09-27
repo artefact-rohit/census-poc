@@ -77,42 +77,22 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 
   const mainData1 = [
     {
-      nextStep:
-        "Secure access to the right MoCI and MoI databases from Wassim Qasim to get the latest updated data",
-      dependency: "N/A",
-      targetDate: "2025-09-25",
+      nextStep: `<p><span data-sheets-root="1"><strong>Consolidate Establishment Data into a Unified Statistical Register</strong><br />Move from fragmented administrative records toward a single, authoritative register of establishments.<br />-Secure access to updated MoCI and MoI databases for latest establishment records.<br />-Request establishment datasets from QFZ, QSTP, and QFC to capture specialized economic activities.<br />-Request unmasked establishment names and identifiers from CGB to accurately classify government units.</span></p>`,
+      dependency: "MOCI, MOI, QFZ, QSTP, QFC, CGB",
+      targetDate: "2025-09-28",
     },
     {
-      nextStep:
-        "Reach out to MoCI to address the data gaps for missing establishment status (active or inactive) for x establishments ",
-      dependency: "MoCI",
-      targetDate: "2025-09-25",
+      nextStep: `<p><span data-sheets-root="1"><strong>Improve Establishment Validity and Coverage</strong><br />-Reach out to MoCI to resolve data gaps on establishment status (currently 5,033 establishments missing active/inactive classification).<br />-Apply CP validity rules (active or &le;90 days expired) and cross-check operational status via Kahramaa electricity data.<br />-Define farm eligibility criteria with MOM and request farm records to populate the empty farm table.</span></p>`,
+      dependency: "MOCI, MOM",
+      targetDate: "2025-09-28",
     },
     {
-      nextStep: "Request establishment datasets from QFZ",
-      dependency: "QFZ",
-      targetDate: "2025-09-25",
-    },
-    {
-      nextStep: "Request the latest establishment datasets from QSTP",
-      dependency: "QSTP",
-      targetDate: "2025-09-25",
-    },
-    {
-      nextStep:
-        "Define farm eligibility criteria to be considered as establishment and request MOM to share the farm records to populate the existing table (current status: Farm table exists but empty)",
-      dependency: "MOM",
-      targetDate: "2025-09-25",
-    },
-    {
-      nextStep:
-        "Prototype big data use case to curate the google places data for establishments in Qatar, and classify between establishment types (private vs public) leveragin GenAI capabilities to serve as validation mechanism",
+      nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Validation through Innovation</strong><br />-Deduplicate records across sources to establish a unique, harmonized entity view.<br />-Prototype a big data use case leveraging Google Places data, with GenAI classification to differentiate private vs. public establishments.<br />-Apply the QDTI framework (completeness, accuracy, timeliness, validity) to measure and improve data quality.<br /></span></p>`,
       dependency: "N/A",
       targetDate: "2025-10-19",
     },
     {
-      nextStep:
-        "Document the underlying indicator computation methodology following Establishments register - UNEC, ILO and UN Standards",
+      nextStep: `<p><span data-sheets-root="1"><strong>Institutionalize Methodology and Transparency</strong><br />Document the underlying indicator computation methodology following Establishments register - UNEC, ILO and UN Standards</span></p>`,
       dependency: "N/A",
       targetDate: "2025-10-30",
     },
@@ -120,29 +100,17 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 
   const mainData2 = [
     {
-      nextStep: "Request employment datasets from QFC",
-      dependency: "QFC",
-      targetDate: "2025-09-25",
-    },
-    {
-      nextStep: "Request employment datasets from QFZ",
-      dependency: "QFZ",
-      targetDate: "2025-09-25",
-    },
-    {
-      nextStep: "Request employment datasets from QSTP",
-      dependency: "QSTP",
-      targetDate: "2025-09-25",
-    },
-    {
-      nextStep:
-        "Finalize the data gaps from GRSIA and request for updates- current identified data gaps include duplications (1.8%)",
-      dependency: "GRSIA",
+      nextStep: `<p><span data-sheets-root="1"><strong>Strengthen the Employment Register as a Core Statistical Asset</strong><br />Transform disparate administrative datasets into a cohesive statistical register by applying &ldquo;sign of life&rdquo; criteria (active employment, non-deceased, no pension drawdowns)<br />-Finalize identified data gaps from GRSIA (e.g., duplicate cases at 1.8%) and request structured updates.<br />-Request and integrate employment datasets from QFC, QFZ, and QSTP to expand private-sector coverage.</span></p>`,
+      dependency: "QFC, QFZ, QSTP",
       targetDate: "2025-09-28",
     },
     {
-      nextStep:
-        "Document the underlying indicator computation methodology following Employment register - ILO and UN Standards",
+      nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Statistical Validity</strong><br />Improve reliability of national labor statistics by embedding validation and quality controls that align with ILO and UN frameworks<br />-Cross-validate active employment status against MOPH death datasets and pension beneficiary records.<br />-Apply deduplication routines across registers to ensure unique representation of individuals.<br />-Score the employment register using the QDTI framework (accuracy, completeness, validity, timeliness).</span></p>`,
+      dependency: "N/A",
+      targetDate: "2025-10-12",
+    },
+    {
+      nextStep: `<p><span data-sheets-root="1"><strong>Institutionalize Methodology and Transparency</strong><br />-Document the computation approach in line with Employment Register standards from ILO and UN.</span></p>`,
       dependency: "N/A",
       targetDate: "2025-10-30",
     },
@@ -206,7 +174,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       indicator.coverage
                     )}`}
                   >
-                    {isQatariIndicator ? "13,883 - 14,008" : "84,284 - 108,813"}
+                    {isQatariIndicator ? "13,883 - 14,008" : "73,938 - 108,793"}
                   </span>
                   {/* <span className="text-sm text-status-success">
                     +{mockDetailData.weeklyChange.coverage}% WoW
@@ -279,11 +247,25 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <th className="text-left py-2">
                             Qatari Employee Count in Private Sector
                           </th>
+                          <th className="text-right py-2">
+                            2025 Census (Preliminary)
+                          </th>
+                          <th className="text-right py-2">2020 Census</th>
+                          <th className="text-right py-2">2023 Labour Force</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="border-b border-border/50">
-                          <td className="py-2">13883</td>
+                          <td className="py-2">Male</td>
+                          <td className="text-right py-2">7940</td>
+                          <td className="text-right py-2">5270</td>
+                          <td className="text-right py-2">6509</td>
+                        </tr>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2">Female</td>
+                          <td className="text-right py-2">5947</td>
+                          <td className="text-right py-2">3241</td>
+                          <td className="text-right py-2">4215</td>
                         </tr>
                       </tbody>
                     </table>
@@ -292,20 +274,24 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       <thead>
                         <tr className="border-b border-border">
                           <th className="text-left py-2">
-                            {" "}
                             Total Establishment
                           </th>
-                          <th className="text-right py-2">108,813</th>
+                          <th className="text-right py-2">
+                            2025 Census (Preliminary)
+                          </th>
+                          <th className="text-right py-2">2020 Census</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Government</td>
-                          <td className="text-right py-2">99.7%</td>
+                          <td className="text-right py-2">277</td>
+                          <td className="text-right py-2">317</td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Non-Government</td>
-                          <td className="text-right py-2">0.3%</td>
+                          <td className="text-right py-2">108,516</td>
+                          <td className="text-right py-2">70,886</td>
                         </tr>
                       </tbody>
                     </table>
@@ -348,7 +334,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                 <thead>
                   <tr className="border-b border-border">
                     <th className="text-left py-2 w-[60%]">Next steps</th>
-                    <th className="text-left py-2 ">Dependencies</th>
+                    <th className="text-center py-2 w-[20%]">Dependencies</th>
                     <th className="py-2 text-center">Target Date</th>
                   </tr>
                 </thead>
@@ -356,7 +342,14 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                   {(isQatariIndicator ? mainData2 : mainData1).map(
                     (issue, index) => (
                       <tr key={index} className="border-b border-border/50">
-                        <td className="py-2 ">{issue.nextStep}</td>
+                        <td className="py-2 ">
+                          <p
+                            className=" text-black"
+                            dangerouslySetInnerHTML={{
+                              __html: issue.nextStep,
+                            }}
+                          ></p>
+                        </td>
                         <td className="py-2 text-center">{issue.dependency}</td>
                         <td className="py-2 text-center">{issue.targetDate}</td>
                       </tr>

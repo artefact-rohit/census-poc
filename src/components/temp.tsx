@@ -3,12 +3,12 @@ import { useState, useRef, useEffect, useCallback } from "react";
 export const PopulationGraphTemp = () => {
   // Your actual data
   const data = [
-    { ageGroup: "65+", male: "95.45%", female: "4.55%" },
-    { ageGroup: "55-64", male: "72.41%", female: "27.59%" },
-    { ageGroup: "45-54", male: "67.10%", female: "32.90%" },
-    { ageGroup: "35-44", male: "55.34%", female: "44.66%" },
-    { ageGroup: "25-34", male: "51.44%", female: "48.56%" },
-    { ageGroup: "15-24", male: "58.12%", female: "41.88%" },
+    { ageGroup: "65+", male: "0.15%", female: "0.01%" },
+    { ageGroup: "55-64", male: "3.02%", female: "1.15%" },
+    { ageGroup: "45-54", male: "12.39%", female: "6.08%" },
+    { ageGroup: "35-44", male: "21.80%", female: "17.59%" },
+    { ageGroup: "25-34", male: "16.64%", female: "15.71%" },
+    { ageGroup: "15-24", male: "3.17%", female: "2.28%" },
   ];
 
   // Set max scale to 3000 (6 units of 500 each)
@@ -83,7 +83,7 @@ export const PopulationGraphTemp = () => {
                   }
                 >
                   <span className="text-sm">
-                    {parseFloat(item.male).toFixed(1)}%
+                    {parseFloat(item.male).toFixed(2)}%
                   </span>
                   <div
                     className="bg-blue-500 border-r border-blue-700 h-6 sm:h-7 md:h-8 flex items-center justify-start pl-1 sm:pl-2 relative"
@@ -116,7 +116,7 @@ export const PopulationGraphTemp = () => {
                     style={{ width: `${toNumber(item.female)}%` }}
                   ></div>
                   <span className="text-sm">
-                    {parseFloat(item.female).toFixed(1)}%
+                    {parseFloat(item.female).toFixed(2)}%
                   </span>
                 </div>
               </div>
