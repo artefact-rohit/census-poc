@@ -22,6 +22,7 @@ import { addDays } from "date-fns";
 import { getNextWeekDate } from "@/lib/utils";
 import { PopulationGraph } from "./PopulationGraph";
 import { PopulationGraphTemp } from "./temp";
+import { BarGraph } from "./BarGraph";
 
 interface Indicator {
   id: string;
@@ -290,27 +291,21 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-border">
-                          <th className="text-left py-2">Sector</th>
-                          <th className="text-right py-2">
+                          <th className="text-left py-2">
+                            {" "}
                             Total Establishment
                           </th>
+                          <th className="text-right py-2">108,813</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="border-b border-border/50">
-                          <td className="py-2">Commercial</td>
-                          <td className="text-right py-2">105,375</td>
+                          <td className="py-2">Non-Government</td>
+                          <td className="text-right py-2">0.3%</td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Government</td>
-                          <td className="text-right py-2">111</td>
-                        </tr>
-
-                        <tr>
-                          <td className="py-2 font-medium">Total</td>
-                          <td className="text-right py-2 font-medium">
-                            105,486
-                          </td>
+                          <td className="text-right py-2">99.7%</td>
                         </tr>
                       </tbody>
                     </table>
@@ -319,7 +314,12 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
               </div>
             </div>
 
-            {isQatariIndicator && <PopulationGraphTemp />}
+            {isQatariIndicator && (
+              <div>
+                <PopulationGraphTemp />
+                <BarGraph />
+              </div>
+            )}
 
             <div className="mt-6 p-4 bg-secondary/30 rounded-lg">
               <p className="text-sm text-muted-foreground">
