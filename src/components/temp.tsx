@@ -31,6 +31,11 @@ export const PopulationGraphTemp = () => {
 
   return (
     <div className="w-full bg-white">
+      <div className="text-center sm:text-lg md:text-xl font-bold text-gray-700 mb-4">
+        <span className="text-base">
+          Qatari Employees In Private Sector Distribution By Age and Gender
+        </span>
+      </div>
       {tooltip.visible && (
         <div
           style={{
@@ -49,14 +54,10 @@ export const PopulationGraphTemp = () => {
           {`Count: ${tooltip.value}`}
         </div>
       )}
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between mb-4 sm:mb-6 px-8 sm:px-16 md:px-24">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-blue-600">
-            Male
-          </h2>
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-red-700">
-            Female
-          </h2>
+      <div className="max-w-7xl ">
+        <div className="flex justify-between mb-2 px-8 sm:px-16 md:px-24">
+          <h2 className="text-lg  font-bold text-blue-600">Male</h2>
+          <h2 className="text-lg  font-bold text-red-700">Female</h2>
         </div>
 
         <div className="relative bg-white border-2 border-gray-300 overflow-hidden">
@@ -81,6 +82,9 @@ export const PopulationGraphTemp = () => {
                     setTooltip({ visible: false, x: 0, y: 0, value: null })
                   }
                 >
+                  <span className="text-sm">
+                    {parseFloat(item.male).toFixed(1)}%
+                  </span>
                   <div
                     className="bg-blue-500 border-r border-blue-700 h-6 sm:h-7 md:h-8 flex items-center justify-start pl-1 sm:pl-2 relative"
                     style={{ width: `${toNumber(item.male)}%` }}
@@ -111,6 +115,9 @@ export const PopulationGraphTemp = () => {
                     className="bg-red-500 border-l border-red-700 h-6 sm:h-7 md:h-8 flex items-center justify-end pr-1 sm:pr-2"
                     style={{ width: `${toNumber(item.female)}%` }}
                   ></div>
+                  <span className="text-sm">
+                    {parseFloat(item.female).toFixed(1)}%
+                  </span>
                 </div>
               </div>
             ))}

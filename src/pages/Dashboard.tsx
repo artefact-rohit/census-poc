@@ -45,6 +45,7 @@ import {
   Legend,
   ResponsiveContainer,
   CartesianGrid,
+  LabelList,
 } from "recharts";
 import { PopulationGraph } from "@/components/PopulationGraph";
 
@@ -122,6 +123,24 @@ const Dashboard = () => {
     "Validation in progress",
     "Validated",
   ];
+
+  const renderCustomLabel = (props) => {
+    const { x, y, width, height, value } = props;
+    if (value === 0) return null; // Skip rendering labels with 0 value
+
+    return (
+      <text
+        x={x + width / 2}
+        y={y + height / 2}
+        fill="#9c9c9c"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize={12}
+      >
+        {value}
+      </text>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -573,15 +592,23 @@ const Dashboard = () => {
                     tick={{ fontSize: 14 }}
                   />
                   <Tooltip />
-                  {keys.map((key, idx) => (
-                    <Bar
-                      key={key}
-                      dataKey={key}
-                      stackId="a"
-                      fill={COLORS[idx]}
-                      // radius={[0, 4, 4, 0]}
-                    />
-                  ))}
+                  {keys
+                    .filter((v) => v != "0")
+                    .map((key, idx) => (
+                      <Bar
+                        key={key}
+                        dataKey={key}
+                        stackId="a"
+                        fill={COLORS[idx]}
+                        // radius={[0, 4, 4, 0]}
+                      >
+                        <LabelList
+                          dataKey={key}
+                          position="center"
+                          content={renderCustomLabel}
+                        />
+                      </Bar>
+                    ))}
                 </BarChart>
               </ResponsiveContainer>
               {/* Legend */}
@@ -660,7 +687,7 @@ const Dashboard = () => {
         <Card className="shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
-              Actions Items
+              Actions Items from Weekly Update
             </CardTitle>
             {/* <p className="text-sm text-muted-foreground mt-1">
               Items requiring DG/SG attention - start weekly meetings with this

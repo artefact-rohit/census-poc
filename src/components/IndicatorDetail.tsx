@@ -300,12 +300,12 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       </thead>
                       <tbody>
                         <tr className="border-b border-border/50">
-                          <td className="py-2">Non-Government</td>
-                          <td className="text-right py-2">0.3%</td>
-                        </tr>
-                        <tr className="border-b border-border/50">
                           <td className="py-2">Government</td>
                           <td className="text-right py-2">99.7%</td>
+                        </tr>
+                        <tr className="border-b border-border/50">
+                          <td className="py-2">Non-Government</td>
+                          <td className="text-right py-2">0.3%</td>
                         </tr>
                       </tbody>
                     </table>

@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   Tooltip as RechartsTooltip,
+  LabelList,
 } from "recharts";
 
 export const BarGraph = () => {
@@ -22,6 +23,9 @@ export const BarGraph = () => {
   };
   return (
     <div className="mt-8 ">
+      <div className="text-center sm:text-lg md:text-xl font-bold text-gray-700">
+        <span className="text-base">Wage Distribution</span>
+      </div>
       <ResponsiveContainer width="100%" height={270}>
         <BarChart
           data={patternData?.items ?? []}
@@ -59,12 +63,11 @@ export const BarGraph = () => {
             fill="#09175f"
             name={"Amount Saved"}
             radius={[4, 4, 0, 0]}
-          />
+          >
+            <LabelList dataKey="value" position="top" />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
-      <div className="text-center sm:text-lg md:text-xl font-bold text-gray-700">
-        <span className="text-base">Wage Distribution</span>
-      </div>
     </div>
   );
 };
