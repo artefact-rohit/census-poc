@@ -20,6 +20,8 @@ import {
 } from "./ui/accordian";
 import { addDays } from "date-fns";
 import { getNextWeekDate } from "@/lib/utils";
+import { PopulationGraph } from "./PopulationGraph";
+import { PopulationGraphTemp } from "./temp";
 
 interface Indicator {
   id: string;
@@ -316,6 +318,8 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                 </div>
               </div>
             </div>
+
+            {isQatariIndicator && <PopulationGraphTemp />}
 
             <div className="mt-6 p-4 bg-secondary/30 rounded-lg">
               <p className="text-sm text-muted-foreground">

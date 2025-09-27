@@ -1,86 +1,51 @@
-import React from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  Cell,
-} from "recharts";
+import { useState } from "react";
 
 export const PopulationGraph = () => {
-  // Data with absolute values for both sides
+  // Use screenshot data, scale based on highest value (3027).
   const data = [
-    { ageGroup: "85+", male: 6.3, female: 0.4 },
-    { ageGroup: "80-84", male: 0.5, female: 0.6 },
-    { ageGroup: "75-79", male: 0.8, female: 0.9 },
-    { ageGroup: "70-74", male: 1.1, female: 1.2 },
-    { ageGroup: "65-69", male: 1.4, female: 1.4 },
-    { ageGroup: "60-64", male: 1.7, female: 1.6 },
-    { ageGroup: "55-59", male: 1.9, female: 1.8 },
-    { ageGroup: "50-54", male: 2.1, female: 2.0 },
-    { ageGroup: "45-49", male: 2.3, female: 2.2 },
-    { ageGroup: "40-44", male: 2.5, female: 2.4 },
-    { ageGroup: "35-39", male: 2.8, female: 2.7 },
-    { ageGroup: "30-34", male: 3.2, female: 3.0 },
-    { ageGroup: "25-29", male: 3.5, female: 3.3 },
-    { ageGroup: "20-24", male: 3.8, female: 3.6 },
-    { ageGroup: "15-19", male: 4.2, female: 4.0 },
-    { ageGroup: "10-14", male: 4.8, female: 4.6 },
-    { ageGroup: "5-9", male: 5.2, female: 5.0 },
-    { ageGroup: "0-4", male: 5.8, female: 5.5 },
+    { ageGroup: "15-24", male: 440, female: 317 },
+    { ageGroup: "25-34", male: 2311, female: 2182 },
+    { ageGroup: "35-44", male: 3027, female: 2443 },
+    { ageGroup: "45-54", male: 1721, female: 844 },
+    { ageGroup: "55-64", male: 420, female: 160 },
+    { ageGroup: "65+", male: 21, female: 1 },
   ];
 
-  // Custom component for male bars (going left)
-  const MaleBar = (props) => {
-    const { payload, x, y, width, height } = props;
-    if (!payload) return null;
+  const [tooltip, setTooltip] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    value: null,
+  });
 
-    const barWidth = (payload.male / 8) * (width / 2); // Scale to half chart width
-    const barX = x + width / 2 - barWidth; // Position from center going left
-
-    return (
-      <rect
-        x={barX}
-        y={y}
-        width={barWidth}
-        height={height}
-        fill="#5A9BD4"
-        stroke="#2E5A87"
-        strokeWidth={0.5}
-      />
-    );
-  };
-
-  // Custom component for female bars (going right)
-  const FemaleBar = (props) => {
-    const { payload, x, y, width, height } = props;
-    if (!payload) return null;
-
-    const barWidth = (payload.female / 8) * (width / 2); // Scale to half chart width
-    const barX = x + width / 2; // Start from center going right
-
-    return (
-      <rect
-        x={barX}
-        y={y}
-        width={barWidth}
-        height={height}
-        fill="#C85450"
-        stroke="#8B2F2F"
-        strokeWidth={0.5}
-      />
-    );
-  };
+  const max = 3027; // Highest value for scaling
 
   return (
-    <div className="w-full min-h-screen bg-white p-6">
+    <div className="w-full bg-white">
+      {tooltip.visible && (
+        <div
+          style={{
+            position: "fixed",
+            top: tooltip.y + 10,
+            left: tooltip.x + 10,
+            background: "rgba(0,0,0,0.75)",
+            color: "white",
+            padding: "4px 8px",
+            borderRadius: "4px",
+            pointerEvents: "none",
+            fontSize: 14,
+            zIndex: 1000,
+          }}
+        >
+          {`Count: ${tooltip.value}`}
+        </div>
+      )}
+
       <div className="max-w-5xl mx-auto">
         {/* Title */}
-        <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
-          1960
-        </h1>
+        {/* <h1 className="text-4xl font-bold text-center mb-6 text-gray-800">
+          Population Pyramid (Actual Data)
+        </h1> */}
 
         {/* Gender Labels */}
         <div className="flex justify-between mb-4 px-16">
@@ -88,31 +53,26 @@ export const PopulationGraph = () => {
           <h2 className="text-xl font-semibold text-red-700">Female</h2>
         </div>
 
-        {/* Manual Chart Implementation */}
         <div className="relative bg-white border">
           <div className="flex flex-col">
-            {/* Chart Header with numbers */}
+            {/* Chart Header with numbers (optional, can adapt to your scaling) */}
             <div className="flex justify-between items-center px-20 py-2 text-sm text-gray-600">
+              {/* Left numbers */}
               <div className="flex space-x-8">
-                <span>8</span>
-                <span>7</span>
-                <span>6</span>
-                <span>5</span>
-                <span>4</span>
-                <span>3</span>
-                <span>2</span>
-                <span>1</span>
+                <span>{max}</span>
+                <span>{Math.round(max * 0.8)}</span>
+                <span>{Math.round(max * 0.6)}</span>
+                <span>{Math.round(max * 0.4)}</span>
+                <span>{Math.round(max * 0.2)}</span>
               </div>
               <span className="font-semibold">0</span>
+              {/* Right numbers */}
               <div className="flex space-x-8">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
-                <span>6</span>
-                <span>7</span>
-                <span>8</span>
+                <span>{Math.round(max * 0.2)}</span>
+                <span>{Math.round(max * 0.4)}</span>
+                <span>{Math.round(max * 0.6)}</span>
+                <span>{Math.round(max * 0.8)}</span>
+                <span>{max}</span>
               </div>
             </div>
 
@@ -123,27 +83,51 @@ export const PopulationGraph = () => {
                 className="flex items-center border-b border-gray-200 h-8"
               >
                 {/* Male side */}
-                <div className="flex-1 flex justify-end items-center pr-1 relative">
+                <div
+                  className="flex-1 flex justify-end items-center pr-1 relative"
+                  onMouseEnter={(e) =>
+                    setTooltip({
+                      visible: true,
+                      x: e.clientX,
+                      y: e.clientY,
+                      value: item.male,
+                    })
+                  }
+                  onMouseLeave={() =>
+                    setTooltip({ visible: false, x: 0, y: 0, value: null })
+                  }
+                >
                   <div
                     className="bg-blue-500 border border-blue-700 h-6"
                     style={{
-                      width: `${(item.male / 8) * 100}%`,
+                      width: `${(item.male / max) * 100}%`,
                       maxWidth: "100%",
                     }}
                   />
                 </div>
-
                 {/* Center line and age label */}
                 <div className="w-20 flex justify-center items-center text-xs font-medium border-l-2 border-gray-400">
                   {item.ageGroup}
                 </div>
-
                 {/* Female side */}
-                <div className="flex-1 flex justify-start items-center pl-1">
+                <div
+                  className="flex-1 flex justify-start items-center pl-1"
+                  onMouseEnter={(e) =>
+                    setTooltip({
+                      visible: true,
+                      x: e.clientX,
+                      y: e.clientY,
+                      value: item.female,
+                    })
+                  }
+                  onMouseLeave={() =>
+                    setTooltip({ visible: false, x: 0, y: 0, value: null })
+                  }
+                >
                   <div
                     className="bg-red-500 border border-red-700 h-6"
                     style={{
-                      width: `${(item.female / 8) * 100}%`,
+                      width: `${(item.female / max) * 100}%`,
                       maxWidth: "100%",
                     }}
                   />
@@ -151,17 +135,15 @@ export const PopulationGraph = () => {
               </div>
             ))}
           </div>
-
           {/* Y-axis label */}
           <div className="absolute left-2 top-1/2 transform -translate-y-1/2 -rotate-90">
             <span className="text-base font-semibold text-gray-700">Age</span>
           </div>
         </div>
-
         {/* X-axis label */}
         <div className="text-center mt-4">
           <span className="text-base font-semibold text-gray-700">
-            Percentage of Population
+            Population Count (Age)
           </span>
         </div>
       </div>
