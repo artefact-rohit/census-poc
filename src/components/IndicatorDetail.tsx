@@ -169,7 +169,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const isQatariIndicator: boolean = indicator.id === "IND002";
 
   const getStatusColor = (percentage: number) => {
-    if (percentage >= 90) return "text-status-success";
+    // if (percentage >= 90) return "text-status-success";
     if (percentage >= 70) return "text-status-warning";
     return "text-status-danger";
   };
@@ -206,7 +206,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       indicator.coverage
                     )}`}
                   >
-                    {isQatariIndicator ? "13,883 - 14,008" : "84,284 - 105,486"}
+                    {isQatariIndicator ? "13,883 - 14,008" : "84,284 - 108,813"}
                   </span>
                   {/* <span className="text-sm text-status-success">
                     +{mockDetailData.weeklyChange.coverage}% WoW

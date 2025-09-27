@@ -11,13 +11,13 @@ import {
 export const BarGraph = () => {
   const patternData = {
     items: [
-      { pattern: "< 15k", value: 484 },
-      { pattern: "15-30k", value: 3091 },
-      { pattern: "30-45k", value: 5038 },
-      { pattern: "45-60k", value: 2536 },
-      { pattern: "60-75k", value: 1260 },
-      { pattern: "75-100k", value: 1074 },
-      { pattern: "100k+", value: 404 },
+      { pattern: "QAR < 15k", value: 484 },
+      { pattern: "QAR 15-30k", value: 3091 },
+      { pattern: "QAR 30-45k", value: 5038 },
+      { pattern: "QAR 45-60k", value: 2536 },
+      { pattern: "QAR 60-75k", value: 1260 },
+      { pattern: "QAR 75-100k", value: 1074 },
+      { pattern: "QAR 100k+", value: 404 },
     ],
   };
   return (
@@ -51,8 +51,8 @@ export const BarGraph = () => {
               borderRadius: "8px",
               fontSize: "12px",
             }}
-            formatter={(value) => [Number(value).toLocaleString(), "Wage"]}
-            labelFormatter={(label) => `Pattern: ${label}`}
+            formatter={(value) => [Number(value).toLocaleString(), "Count"]}
+            labelFormatter={(label) => `Wage Bracket: ${label}`}
           />
           <Bar
             dataKey={"value"}
