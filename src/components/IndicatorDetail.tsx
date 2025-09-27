@@ -254,22 +254,52 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <th className="text-right py-2">
                             2025 Census (Preliminary)
                           </th>
-                          <th className="text-right py-2">2020 Census</th>
+                          <th className="text-right py-2 px-8">2020 Census</th>
                           <th className="text-right py-2">2023 Labour Force</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Male</td>
-                          <td className="text-right py-2">7940</td>
-                          <td className="text-right py-2">5270</td>
-                          <td className="text-right py-2">6509</td>
+                          <td className="text-right py-2">
+                            7940{" "}
+                            <span className="text-muted-foreground">
+                              (57.18%)
+                            </span>
+                          </td>
+                          <td className="text-right py-2">
+                            5270{" "}
+                            <span className="text-muted-foreground">
+                              (61.92%)
+                            </span>
+                          </td>
+                          <td className="text-right py-2">
+                            6509{" "}
+                            <span className="text-muted-foreground">
+                              (60.70%)
+                            </span>
+                          </td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Female</td>
-                          <td className="text-right py-2">5947</td>
-                          <td className="text-right py-2">3241</td>
-                          <td className="text-right py-2">4215</td>
+                          <td className="text-right py-2">
+                            5947{" "}
+                            <span className="text-muted-foreground">
+                              (42.82%)
+                            </span>
+                          </td>
+                          <td className="text-right py-2">
+                            3241{" "}
+                            <span className="text-muted-foreground">
+                              (38.08%)
+                            </span>
+                          </td>
+                          <td className="text-right py-2">
+                            4215{" "}
+                            <span className="text-muted-foreground">
+                              (39.30%)
+                            </span>
+                          </td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2 font-semibold">Total</td>
@@ -299,13 +329,33 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       <tbody>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Government</td>
-                          <td className="text-right py-2">277</td>
-                          <td className="text-right py-2">317</td>
+                          <td className="text-right py-2">
+                            277{" "}
+                            <span className="text-muted-foreground">
+                              (0.26)
+                            </span>
+                          </td>
+                          <td className="text-right py-2">
+                            317{" "}
+                            <span className="text-muted-foreground">
+                              (4.13)
+                            </span>
+                          </td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2">Non-Government</td>
-                          <td className="text-right py-2">108,516</td>
-                          <td className="text-right py-2">70,886</td>
+                          <td className="text-right py-2">
+                            108,516{" "}
+                            <span className="text-muted-foreground">
+                              (99.74)
+                            </span>
+                          </td>
+                          <td className="text-right py-2">
+                            70,886{" "}
+                            <span className="text-muted-foreground">
+                              (95.87)
+                            </span>
+                          </td>
                         </tr>
                         <tr className="border-b border-border/50">
                           <td className="py-2 font-semibold">Total</td>

@@ -19,7 +19,7 @@ interface LayoutProps {
 const navigation = [
   { name: "Overview", href: "/dashboard", icon: BarChart3 },
   { name: "Census Indicators", href: "/indicators", icon: FileText },
-  { name: "Registers", href: "/registers", icon: Database },
+  { name: "Registers(Coming Soon)", href: "/registers", icon: Database },
   { name: "Datasets", href: "/datasets", icon: Layers },
   { name: "Dissemination", href: "/dissemination", icon: Share2 },
   // { name: "Admin", href: "/admin", icon: Shield },
