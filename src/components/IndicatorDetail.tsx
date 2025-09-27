@@ -174,7 +174,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       indicator.coverage
                     )}`}
                   >
-                    {isQatariIndicator ? "13,883 - 14,008" : "73,938 - 108,793"}
+                    {isQatariIndicator ? "13,887 - 14,008" : "73,938 - 108,793"}
                   </span>
                   {/* <span className="text-sm text-status-success">
                     +{mockDetailData.weeklyChange.coverage}% WoW
