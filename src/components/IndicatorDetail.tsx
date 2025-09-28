@@ -104,14 +104,14 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 
   const mainData2 = [
     {
-      nextStep: `<p><span data-sheets-root="1"><strong>Strengthen the Employment Register as a Core Statistical Asset</strong><br />Transform disparate administrative datasets into a cohesive statistical register by applying &ldquo;sign of life&rdquo; criteria (active employment, non-deceased, no pension drawdowns)<br />-Finalize identified data gaps from GRSIA (e.g., duplicate cases at 1.8%) and request structured updates.<br />-Request and integrate employment datasets from QFC, QFZ, and QSTP to expand private-sector coverage.</span></p>`,
+      nextStep: `<p><span data-sheets-root="1"><strong>Strengthen the Employment Register as a Core Statistical Asset</strong><br />Transform disparate administrative datasets into a cohesive statistical register by applying &ldquo;sign of life&rdquo; criteria (active employment, non-deceased, no pension drawdowns)<br />-Validate identified data gaps from GRSIA (e.g., duplicate cases at 1.8%) and request structured updates.<br />-Request and integrate employment datasets from QFC, QFZ, and QSTP to expand private-sector coverage.</span></p>`,
       dependency: "QFC, QFZ, QSTP",
       targetDate: "2025-10-19",
     },
     {
-      nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Statistical Validity</strong><br />Improve reliability of national labor statistics by embedding validation and quality controls that align with ILO and UN frameworks<br />-Cross-validate active employment status against MOPH death datasets and pension beneficiary records.<br />-Apply deduplication routines across registers to ensure unique representation of individuals.<br />-Score the employment register using the QDTI framework (accuracy, completeness, validity, timeliness).</span></p>`,
+      nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Statistical Validity</strong><br />Improve reliability of national labor statistics by embedding validation and quality controls that align with ILO and UN frameworks<br />-Cross-validate active employment status against MOPH death datasets and pension beneficiary records for new datasets.<br />-Apply deduplication routines across registers to ensure unique representation of individuals.<br />-Score the employment register using the QDTI framework (accuracy, completeness, validity, timeliness).</span></p>`,
       dependency: "N/A",
-      targetDate: "2025-10-12",
+      targetDate: "2025-10-23",
     },
     {
       nextStep: `<p><span data-sheets-root="1"><strong>Institutionalize Methodology and Transparency</strong><br />-Document the computation approach in line with Employment Register standards from ILO and UN.</span></p>`,
@@ -229,7 +229,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
           </div>
           <div className="mt-4 text-xs text-muted-foreground">
             *Data Sources :{" "}
-            {isQatariIndicator ? "GRSIA" : "MOCI, QFC, GRSIA, KAHRAMAA"}
+            {isQatariIndicator ? "GRSIA, MOPH" : "MOCI, QFC, GRSIA, KAHRAMAA"}
           </div>
         </CardContent>
       </Card>
