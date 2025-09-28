@@ -47,7 +47,6 @@ import {
   CartesianGrid,
   LabelList,
 } from "recharts";
-import { PopulationGraph } from "@/components/PopulationGraph";
 
 const COLORS = [
   "#323F4B",

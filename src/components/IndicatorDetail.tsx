@@ -20,9 +20,9 @@ import {
 } from "./ui/accordian";
 import { addDays } from "date-fns";
 import { getNextWeekDate } from "@/lib/utils";
-import { PopulationGraph } from "./PopulationGraph";
 import { PopulationGraphTemp } from "./temp";
 import { BarGraph } from "./BarGraph";
+import { PopulationGraph } from "./PopulationGraph";
 
 interface Indicator {
   id: string;
@@ -109,8 +109,8 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
       targetDate: "2025-10-19",
     },
     {
-      nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Statistical Validity</strong><br />Improve reliability of national labor statistics by embedding validation and quality controls that align with ILO and UN frameworks<br />-Cross-validate active employment status against MOPH death datasets and pension beneficiary records for new datasets.<br />-Apply deduplication routines across registers to ensure unique representation of individuals.<br />-Score the employment register using the QDTI framework (accuracy, completeness, validity, timeliness).</span></p>`,
-      dependency: "N/A",
+      nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Statistical Validity</strong><br />Improve reliability of national labor statistics by embedding validation and quality controls that align with ILO and UN frameworks<br />-For new datasets: Cross-validate active employment status against MOPH death datasets and pension beneficiary records.<br />-Define technical and business data quality rules and implement QDTI framework to support the development of the employment register.</span></p>`,
+      dependency: "QFC, QFZ, QSTP",
       targetDate: "2025-10-23",
     },
     {
@@ -380,6 +380,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             {isQatariIndicator && (
               <div>
                 <PopulationGraphTemp />
+                {/* <PopulationGraph /> */}
                 <BarGraph />
               </div>
             )}
