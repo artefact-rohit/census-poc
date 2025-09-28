@@ -577,7 +577,7 @@ const Dashboard = () => {
               </div>
             </CardHeader>
             <CardContent className="space-y-4  ">
-              <ResponsiveContainer width="100%" height={150}>
+              {/* <ResponsiveContainer width="100%" height={150}>
                 <BarChart
                   data={datasetChartData}
                   layout="vertical"
@@ -610,9 +610,9 @@ const Dashboard = () => {
                       </Bar>
                     ))}
                 </BarChart>
-              </ResponsiveContainer>
+              </ResponsiveContainer> */}
               {/* Legend */}
-              <div className="flex flex-wrap items-center justify-center gap-2">
+              {/* <div className="flex flex-wrap items-center justify-center gap-2">
                 {keys.map((key, idx) => (
                   <div key={key} className="flex items-center gap-2 mr-2">
                     <span
@@ -622,6 +622,31 @@ const Dashboard = () => {
                     <span className="text-muted-foreground text-sm">{key}</span>
                   </div>
                 ))}
+              </div> */}
+              {/* Breakdown */}
+              <div className="space-y-2 pb-12">
+                <h4 className="text-sm font-medium text-card-foreground">
+                  Update
+                </h4>
+
+                <div className="pt-0.5 space-y-2">
+                  <ul className="pl-5">
+                    {[
+                      "Assessed datasets from 12 different entities along the QDTI dimensions (accuracy, completeness, consistency, uniqueness, timeliness, validity, accessibility) ",
+                      "Identified 40+ data gaps ",
+                      "Reached out to 17 different entities requesting 600+ additional data fields to support census indicators and registers development",
+                    ].map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center justify-between pb-2"
+                      >
+                        <span className="text-sm text-muted-foreground">
+                          - {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -701,7 +726,7 @@ const Dashboard = () => {
                   <TableHead>Item</TableHead>
                   <TableHead>Topic</TableHead>
                   <TableHead>Owner</TableHead>
-                  <TableHead>Criticality</TableHead>
+                  {/* <TableHead>Criticality</TableHead> */}
                   <TableHead>Status</TableHead>
                   <TableHead>Due Date</TableHead>
                   <TableHead className="w-[100px]">Action</TableHead>
@@ -718,9 +743,9 @@ const Dashboard = () => {
                     <TableCell className="font-medium">{item.item}</TableCell>
                     <TableCell>{item.topic}</TableCell>
                     <TableCell>{item.owner}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       {getCriticalityBadge(item.criticality)}
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       {resolvedItems.includes(item.id) ? (
                         <div className="flex items-center space-x-1 text-status-success">

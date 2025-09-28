@@ -24,7 +24,7 @@ export const BarGraph = () => {
   return (
     <div className="mt-8 ">
       <div className="text-center sm:text-lg md:text-xl font-bold text-gray-700">
-        <span className="text-base">Wage Distribution</span>
+        <span className="text-base">Monthly Wage Distribution</span>
       </div>
       <ResponsiveContainer width="100%" height={270}>
         <BarChart

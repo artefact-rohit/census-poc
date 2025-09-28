@@ -52,7 +52,11 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
   const dataSource1 = `<table dir="ltr" border="1" cellspacing="0" cellpadding="0" data-sheets-root="1" data-sheets-baot="1"><colgroup><col width="547" /><col width="34" /><col width="100" /><col width="100" /><col width="100" /></colgroup>
 <tbody>
 <tr>
-<td colspan="5" rowspan="1"><strong>MOCI (<span style="color: #339966;">Integrated</span>)</strong> <br /> - Ministry of Commerce and Industry <br /><br /> <strong>QFZ (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Free Zone<br /><br /> <strong>QFC (<span style="color: #339966;">Integrated</span>)</strong><br /> - Qatar Financial Center<br /><br /> <strong>QSTP (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /> <strong>MOM (<span style="color: #ff6600;">Integrated, additional dataset required</span>)</strong><br /> - Ministry of Municipality<br /><br /> <strong>MOI (<span style="color: #339966;">Integrated</span>)</strong><br /> - Ministry of Interiors<br /><br /> <strong>GRSIA (<span style="color: #339966;">Integrated</span>)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /> <strong>KAHRAMAA (<span style="color: #339966;">Integrated</span>)</strong><br />- Qatar General Electricity &amp; Water Corporation</td>
+<td colspan="5" rowspan="1">
+<p><strong>MOCI (<span style="color: #339966;">Integrated</span>)</strong> <br /> - Ministry of Commerce and Industry <br /><br /> <strong>QFZ (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Free Zone<br /><br /> <strong>QFC (<span style="color: #339966;">Integrated</span>)</strong><br /> - Qatar Financial Center<br /><br /> <strong>QSTP (<span style="color: #ff0000;">To Be Integrated</span>)</strong><br /> - Qatar Science &amp; Technology Park<br /><br /> <strong>MOM (<span style="color: #ff6600;">Integrated, additional dataset required</span>)</strong><br /> - Ministry of Municipality<br /><br /> <strong>MOI (<span style="color: #339966;">Integrated</span>)</strong><br /> - Ministry of Interiors<br /><br /> <strong>GRSIA (<span style="color: #339966;">Integrated</span>)</strong><br /> - General Retirement and Social Insurance Authority<br /><br /> <strong>KAHRAMAA (<span style="color: #339966;">Integrated</span>)</strong><br />- Qatar General Electricity &amp; Water Corporation</p>
+<p>&nbsp;</p>
+<p><strong>CGB (<span style="color: #ff6600;">Unmasking required</span>)</strong><br />-Civil Service and Government Bureau</p>
+</td>
 </tr>
 </tbody>
 </table>`;
@@ -79,12 +83,12 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
     {
       nextStep: `<p><span data-sheets-root="1"><strong>Consolidate Establishment Data into a Unified Statistical Register</strong><br />Move from fragmented administrative records toward a single, authoritative register of establishments.<br />-Secure access to updated MoCI and MoI databases for latest establishment records.<br />-Request establishment datasets from QFZ and QSTP to capture specialized economic activities.<br />-Request unmasked establishment names and identifiers from CGB to accurately classify government units.</span></p>`,
       dependency: "MOCI, MOI, QFZ, QSTP, CGB",
-      targetDate: "2025-09-28",
+      targetDate: "2025-10-19",
     },
     {
       nextStep: `<p><span data-sheets-root="1"><strong>Improve Establishment Validity and Coverage</strong><br />-Reach out to MoCI to resolve data gaps on establishment status (currently 5,033 establishments missing active/inactive classification).<br />-Apply CP validity rules (active or &le;90 days expired) and cross-check operational status via Kahramaa electricity data.<br />-Define farm eligibility criteria with MOM and request farm records to populate the empty farm table.</span></p>`,
       dependency: "MOCI, MOM",
-      targetDate: "2025-09-28",
+      targetDate: "2025-10-19",
     },
     {
       nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Validation through Innovation</strong><br />-Deduplicate records across sources to establish a unique, harmonized entity view.<br />-Prototype a big data use case leveraging Google Places data, with GenAI classification to differentiate private vs. public establishments.<br />-Apply the QDTI framework (completeness, accuracy, timeliness, validity) to measure and improve data quality.<br /></span></p>`,
@@ -102,7 +106,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
     {
       nextStep: `<p><span data-sheets-root="1"><strong>Strengthen the Employment Register as a Core Statistical Asset</strong><br />Transform disparate administrative datasets into a cohesive statistical register by applying &ldquo;sign of life&rdquo; criteria (active employment, non-deceased, no pension drawdowns)<br />-Finalize identified data gaps from GRSIA (e.g., duplicate cases at 1.8%) and request structured updates.<br />-Request and integrate employment datasets from QFC, QFZ, and QSTP to expand private-sector coverage.</span></p>`,
       dependency: "QFC, QFZ, QSTP",
-      targetDate: "2025-09-28",
+      targetDate: "2025-10-19",
     },
     {
       nextStep: `<p><span data-sheets-root="1"><strong>Enhance Data Quality and Statistical Validity</strong><br />Improve reliability of national labor statistics by embedding validation and quality controls that align with ILO and UN frameworks<br />-Cross-validate active employment status against MOPH death datasets and pension beneficiary records.<br />-Apply deduplication routines across registers to ensure unique representation of individuals.<br />-Score the employment register using the QDTI framework (accuracy, completeness, validity, timeliness).</span></p>`,
@@ -491,7 +495,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                     ></p>
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   <h4 className="font-medium mb-2 mt-4">Computation Details</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -507,7 +511,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </CardContent>
             </AccordionContent>
           </AccordionItem>
