@@ -332,13 +332,13 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <td className="text-right py-2">
                             277{" "}
                             <span className="text-muted-foreground">
-                              (0.26)
+                              (0.26%)
                             </span>
                           </td>
                           <td className="text-right py-2">
                             317{" "}
                             <span className="text-muted-foreground">
-                              (4.13)
+                              (0.44%)
                             </span>
                           </td>
                         </tr>
@@ -347,13 +347,13 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <td className="text-right py-2">
                             108,516{" "}
                             <span className="text-muted-foreground">
-                              (99.74)
+                              (99.74%)
                             </span>
                           </td>
                           <td className="text-right py-2">
                             70,886{" "}
                             <span className="text-muted-foreground">
-                              (95.87)
+                              (99.55%)
                             </span>
                           </td>
                         </tr>
@@ -363,7 +363,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                             108,793
                           </td>
                           <td className="text-right py-2 font-semibold">
-                            73,938
+                            71,203
                           </td>
                         </tr>
                       </tbody>
