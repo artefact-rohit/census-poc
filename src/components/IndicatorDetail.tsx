@@ -81,7 +81,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
 
   const mainData1 = [
     {
-      nextStep: `<p><span data-sheets-root="1"><strong>Consolidate Establishment Data into a Unified Statistical Register</strong><br />Move from fragmented administrative records toward a single, authoritative register of establishments.<br />-Secure access to updated MoCI and MoI databases for latest establishment records.<br />-Request establishment datasets from QFZ and QSTP to capture specialized economic activities.<br />-Request unmasked establishment names and identifiers from CGB to accurately classify government units.</span></p>`,
+      nextStep: `<p><span data-sheets-root="1"><strong>Consolidate Establishment Data into a Unified Statistical Register</strong><br />Move from fragmented administrative records toward a single, authoritative register of establishments.<br />-Secure access to updated MoCI and MoI databases for latest establishment records.<br />-Request establishment datasets from QFZ and QSTP to capture specialized economic activities.<br />-*Request unmasked establishment names and identifiers from CGB to accurately classify government units.</span></p>`,
       dependency: "MOCI, MOI, QFZ, QSTP, CGB",
       targetDate: "2025-10-19",
     },
@@ -336,7 +336,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                           <td className="text-right py-2">
                             277{" "}
                             <span className="text-muted-foreground">
-                              (0.26%)
+                              (0.26%)*
                             </span>
                           </td>
                           <td className="text-right py-2">
