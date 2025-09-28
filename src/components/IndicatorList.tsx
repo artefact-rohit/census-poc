@@ -190,7 +190,7 @@ export const IndicatorList = ({
 
       <CardContent className="px-0">
         <div className="space-y-2 max-h-[calc(100vh-300px)] overflow-y-auto px-6">
-          {filteredIndicators.map((indicator) => (
+          {filteredIndicators.map((indicator, index) => (
             <div
               key={indicator.id}
               onClick={() => onSelectIndicator(indicator)}
@@ -223,7 +223,7 @@ export const IndicatorList = ({
                   Confidence Range: {indicator.coverage}
                 </span>
                 <span className="text-muted-foreground">
-                  QDTI: {indicator.qdti}%
+                  QDTI: {index == 1 ? "Pending" : `${indicator.qdti}%`}
                 </span>
               </div>
             </div>

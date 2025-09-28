@@ -203,13 +203,15 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
                       indicator.qdti
                     )}`}
                   >
-                    {indicator.qdti}%
+                    {isQatariIndicator ? "Pending" : `${indicator.qdti}%`}
                   </span>
                   {/* <span className="text-sm text-status-success">
                     +{mockDetailData.weeklyChange.qdti}% WoW
                   </span> */}
                 </div>
-                <Progress value={indicator.qdti} />
+
+                {!isQatariIndicator && <Progress value={indicator.qdti} />}
+
                 {/* <div className="text-xs text-muted-foreground">
                   Planned vs Actual: {mockDetailData.plannedVsActual.qdti}%
                 </div> */}
@@ -380,7 +382,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             {isQatariIndicator && (
               <div>
                 <PopulationGraphTemp />
-                {/* <PopulationGraph /> */}
+                <PopulationGraph />
                 <BarGraph />
               </div>
             )}
