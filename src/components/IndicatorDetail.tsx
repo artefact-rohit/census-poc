@@ -382,7 +382,7 @@ export const IndicatorDetail = ({ indicator }: IndicatorDetailProps) => {
             {isQatariIndicator && (
               <div>
                 <PopulationGraphTemp />
-                <PopulationGraph />
+                {/* <PopulationGraph /> */}
                 <BarGraph />
               </div>
             )}
